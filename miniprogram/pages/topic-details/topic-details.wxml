@@ -1,0 +1,59 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<wxs module="res" src="../../utils/res.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">详情</text>
+		<text class="bg-purple"></text>
+	</view>
+</view>
+
+<view class="cu-list menu">
+	<view class="cu-item">
+		<view class="content padding-tb-sm">
+			<view>
+				<text class="cuIcon-magic text-orange margin-right-xs"></text>
+				# {{ topic.name }}
+			</view>
+			<view class="text-gray text-sm ">
+				<text class="cuIcon-time margin-right-xs"></text>
+				{{ tutil.formatTime(topic.createTime, 'yy-mm-dd', '.') }}</view>
+		</view>
+		<view class="action" bindtap="navToUserDetail">
+			<view class="cu-avatar group bg-white">
+				<view class="cu-avatar round sm" style="background-image: url({{user.avatarUrl}})"></view>
+			</view>
+			<text class="text-gray text-sm">{{user.nickName}}</text>
+		</view>
+	</view>
+</view>
+
+<scroll-view class="bg-white nav">
+	<view>
+		<view class="cu-item flex-sub {{curTab==0?'active-tab':''}}" data-id="0" bindtap="selectTab">
+			<text class="cuIcon-camera"></text>
+			美拍</view>
+		<view class="cu-item flex-sub {{curTab==1?'active-tab':''}}" data-id="1" bindtap="selectTab">
+			<text class="cuIcon-video"></text>
+			视频</view>
+	</view>
+</scroll-view>
+
+
+<block wx:if="{{curTab == 0}}" wx:for="{{imageList}}" wx:key="index">
+  <image-card image="{{item}}"></image-card>
+</block>
+
+<!-- 视频列表 -->
+<block wx:if="{{ curTab == 1 }}">
+	<view class="list-card">
+		<block wx:for="{{ videoList }}" wx:key="index">
+			<video-card video="{{ item }}"></video-card>
+		</block>
+	</view>
+</block>
+
+<view class="cu-load bg-white {{isLoading?'loading':''}}"></view>
+
+<tip content="到底了哦"></tip>
+<nav-back></nav-back>

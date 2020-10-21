@@ -1,0 +1,11 @@
+<!-- 编辑文案 -->
+<view class="text-area">
+	<textarea maxlength="{{ maxLength }}" auto-focus="true" value="{{ topic }}" bindinput="onInput" placeholder="想和大家讨论什么有趣的话题？"></textarea>
+  <view class="action">
+		{{ topic.length }}/{{ maxLength }}
+	</view>
+</view>
+
+<view class="button">
+<button class="cu-btn bg-red block margin-tb-sm lg" open-type="getUserInfo" bindgetuserinfo="done">发布</button>
+</view>

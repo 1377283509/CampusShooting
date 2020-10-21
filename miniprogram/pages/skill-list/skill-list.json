@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "skill-card": "../../components/skill-card/skill-card"
+  },
+  "navigationStyle": "custom"
+}

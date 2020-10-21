@@ -1,0 +1,9 @@
+.active-tab {
+  color: #38C098;
+  font-weight: bold;
+}
+
+.sub-title{
+  padding: 12rpx;
+  padding-left: 24rpx;
+}

@@ -1,0 +1,61 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+
+.card {
+  width: 345rpx;
+  height: 280rpx;
+  display: inline-block;
+  margin-left: 16rpx;
+}
+
+.card-image {
+  width: 100%;
+  height: 220rpx;
+  position: relative;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx 16rpx 0 0;
+}
+
+.card-text {
+  background-color: white;
+  width: 100%;
+  height: 60rpx;
+  border-radius: 0 0 16rpx 16rpx;
+  background-color: #f8f8f8;
+  padding: 0 12rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.play-btn {
+  position: absolute;
+  height: 50rpx;
+  width: 110rpx;
+  bottom: -20rpx;
+  left: 0;
+  border-radius: 50rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.topic{
+  position: absolute;
+  top: 0rpx; 
+  left: 0rpx;
+  color: white;
+  background-color: black;
+  font-size: 22rpx;
+  font-weight: normal;
+  padding: 4rpx 8rpx;
+  border-radius: 16rpx 0 16rpx 0;
+}

@@ -1,0 +1,20 @@
+<view class="card" bindtap="navToDetail" data-id="{{video._id}}">
+	<view class="card-image">
+		<image class="img" src="{{video.cover}}" mode="aspectFill"></image>
+
+		<!-- 播放按钮 -->
+		<view class="play-btn" style="background-color:{{color}}">
+			<text class="cuIcon-playfill text-white"></text>
+			<text class="text-white text-sm padding-left-xs">{{video.viewCount}}</text>
+		</view>
+
+		<view wx:if="{{video.topic}}" class="topic">
+			<text class="text-orange"># </text>
+			<text>{{video.topic}}</text>
+		</view>
+	</view>
+
+	<view class="card-text">
+		<text class="cuIcon-locationfill text-xs"> {{video.university}}</text>
+	</view>
+</view>

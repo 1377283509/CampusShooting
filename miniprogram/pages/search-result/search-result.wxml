@@ -1,0 +1,28 @@
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">搜索</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+<!-- 搜索 -->
+<view class="cu-bar search bg-white">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input placeholder="搜话题" value="{{searchValue}}" type="text" confirm-type="search" bindinput="onInput" bindconfirm="onSearch"></input>
+	</view>
+</view>
+<!-- tab -->
+<scroll-view class="bg-white nav">
+	<view>
+		<block wx:for="{{ tabList }}" wx:key="index">
+			<view class="cu-item flex-sub {{curTab==index?'active-tab':''}}" data-id="{{index}}" bindtap="selectTab">
+				<text class="{{ item.icon }}"></text>
+				{{item.name}}
+			</view>
+		</block>
+	</view>
+</scroll-view>
+
+
+<nav-back></nav-back>

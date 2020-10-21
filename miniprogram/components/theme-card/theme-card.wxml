@@ -1,0 +1,15 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<view class="card">
+	<view class="card-image">
+		<image mode="aspectFill" src="{{ theme.cover }}" style="width:100%;height:100%"></image>
+		<view wx:if="{{ isNew }}" class="image-tag">新一期</view>
+		<view bindtap="navToDetail" data-url="{{ theme.url }}" class="image-btn" style="top: 24rpx;background-color:orange">详情</view>
+		<view bindtap="navToList" data-id="{{ theme._id }}" data-type="{{theme.type}}" class="image-btn" style="top: 88rpx;background-color:mediumaquamarine">作品</view>
+		<view class="image-text">
+			<view>{{ theme.title }}</view>
+			<view style="font-size:24rpx">
+				<text style="color:lightgray">{{tutil.formatTime(theme.startTime, "yy-mm-dd", '.')}} — {{tutil.formatTime(theme.endTime, "yy-mm-dd", '.')}}</text>
+			</view>
+		</view>
+	</view>
+</view>

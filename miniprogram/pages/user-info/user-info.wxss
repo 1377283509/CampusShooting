@@ -1,0 +1,78 @@
+.login-card {
+  width: 100%;
+  text-align: center;
+}
+
+.button {
+  width: 50%;
+  color: white;
+  font-size: 26rpx;
+  background-color: #38C098;
+}
+
+.button::after {
+  border-radius: 12rpx;
+}
+
+.user-card{
+  background-color: white;
+  padding: 18rpx;
+}
+
+.user-card-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.base-info{
+ margin-left: 24rpx;
+ display: flex;
+ width: 558rpx;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.user-info{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.introduction{
+  width: 100%;
+  padding: 12rpx 24rpx;
+  background-color: white;
+}
+
+.card{
+  margin-top: 18rpx;
+  padding: 12rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-card{
+  margin-top: 12rpx;
+  background-color: white;
+  padding-bottom: 12rpx;
+}
+
+.nav-li {
+  display: inline-block;
+  padding: 24rpx 24rpx;
+  border-radius: 12rpx;
+  width: 31%;
+  margin: 8rpx 1% 8rpx 1.1%;
+  position: relative;
+}
+
+.cus-sub-title{
+  padding: 12rpx 24rpx;
+}

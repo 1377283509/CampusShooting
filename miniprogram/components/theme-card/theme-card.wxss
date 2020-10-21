@@ -1,0 +1,51 @@
+.card{
+  width: 100%;
+  height: max-content;
+  background-color: white;
+  padding: 12rpx 24rpx;
+  border-radius: 8rpx;
+}
+
+.card-image{
+  width: 100%;
+  height: 320rpx;
+  position: relative;
+}
+
+.card-image image{
+  border-radius: 8rpx;
+}
+
+.image-tag{
+  background-color: lightcoral;
+  color: white;
+  font-size: 22rpx;
+  font-weight: bold;
+  font-family: sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 6rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.image-text{
+  width: 100%;
+  position: absolute;
+  padding: 12rpx 24rpx;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  color: white;
+}
+
+.image-btn{
+  padding: 6rpx 18rpx 6rpx 24rpx;
+  border-radius: 50rpx 0 0 50rpx;
+  position: absolute;
+  right: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 24rpx;
+  letter-spacing: 4;
+}

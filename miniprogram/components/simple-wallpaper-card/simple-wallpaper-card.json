@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "simple-wallpaper-card": "/components/simple-wallpaper-card/simple-wallpaper-card"
+  }
+}

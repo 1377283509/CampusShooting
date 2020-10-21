@@ -1,0 +1,10 @@
+.text-area{
+  background-color: white;
+  margin-top: 12rpx;
+  padding: 24rpx;
+  min-height: 300rpx;
+}
+
+.input{
+  margin-top: 12rpx;
+}

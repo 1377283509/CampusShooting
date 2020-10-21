@@ -1,0 +1,14 @@
+<view style="width:100%;background-color:white;padding-bottom:24rpx">
+	<view class="video-card">
+		<swiper previous-margin="18rpx" next-margin="118rpx">
+			<block wx:for="{{ videoList }}" wx:key="index">
+				<swiper-item>
+					<image bindtap="navToDetail" data-id="{{ item._id }}" class="image-style" src="{{ item.cover }}" mode="aspectFill">
+						<text class="cuIcon-location university"> {{ item.university }}</text>
+						<text class="cuIcon-playfill play"></text>
+					</image>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+</view>

@@ -1,0 +1,7 @@
+<view class="card" bindtap="navToDetail" data-id="{{wallpaper._id}}">
+	<image class="card-image" mode="aspectFill" src="{{wallpaper.images[0]}}"></image>
+	<view class="like-count">
+		<text class="cuIcon-likefill text-red margin-right-xs"></text>
+		<text>{{wallpaper.likeCount}}</text>
+  </view>
+</view>

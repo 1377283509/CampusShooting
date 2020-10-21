@@ -1,0 +1,19 @@
+<view class="card" bindtap="navToDetail" data-id="{{image._id}}">
+
+	<view class="card-image">
+		<!-- 图片 -->
+		<image src="{{image.images[0]}}" mode="aspectFill"></image>
+		<!-- 话题 -->
+		<view wx:if="{{image.topic}}" class="topic">
+			<text class="text-orange"># </text>
+			<text>{{image.topic}}</text></view>
+		<!-- 浏览次数 -->
+		<text class="cuIcon-attention view-count"> {{image.viewCount}}</text>
+	</view>
+
+	<view class="card-text">
+		<text class="cuIcon-locationfill margin-right-xs text-bold text-black"></text>
+		<text>{{image.university}}</text>
+	</view>
+
+</view>

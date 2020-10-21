@@ -1,0 +1,24 @@
+<blank-view color="white"></blank-view>
+<!-- title -->
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">作品</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+
+<block wx:for="{{ list }}" wx:key="index">
+	<block wx:if="{{ type=='image' }}">
+		<image-card image="{{ item }}"></image-card>
+	</block>
+	<block wx:if="{{ type=='video' }}">
+		<view class="padding-sm bg-white">
+			<video-card video="{{ item }}"></video-card>
+		</view>
+	</block>
+</block>
+
+<view wx:if="{{isLoading}}" class="cu-load loading"></view>
+
+<block wx:if="{{!isLoading}}"><tip content="到底了哦"></tip></block>
+<nav-back></nav-back>

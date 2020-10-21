@@ -1,0 +1,115 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">我的</text>
+		<text class="bg-red"></text>
+	</view>
+</view>
+
+<!-- 用户信息 -->
+<!-- 状态异常 -->
+<block wx:if="{{ !userInfo }}">
+	<view class="login-card margin-top">
+		<view class="text-xs text-gray">hi~ 登录开启更多好玩的功能</view>
+		<button open-type="getUserInfo" class="button" bindgetuserinfo="getUserInfo">
+			<view>微信登录</view>
+		</button>
+	</view>
+</block>
+
+
+<!-- 状态正常 -->
+<block wx:if="{{ userInfo }}">
+	<!-- 用户信息 -->
+	<view class="cu-list menu-avatar" bindtap="editUserInfo">
+		<view class="cu-item">
+			<view class="cu-avatar round lg" style="background-image:url({{userInfo.avatarUrl}})">'
+			</view>
+			<view class="content text-black">
+				<view class="text-cut">
+					<text>{{ userInfo.nickName }}</text>
+					<text class="{{userInfo.gender=='男'?'cuIcon-male text-blue':'cuIcon-female text-pink'}} margin-left-sm"></text>
+				</view>
+				<view class="text-gray text-sm flex">
+					<text class="cuIcon-location">{{ userInfo.university }}</text>
+				</view>
+			</view>
+
+			<view class="action">
+				<view class="cu-tag bg-gray round df" style="margin-right:12rpx">编辑</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 个人介绍 -->
+	<view class="introduction">
+		<text>{{ userInfo.introduction }}</text>
+	</view>
+
+	<!-- 我喜欢 -->
+	<view class="my-card">
+		<view class="cus-sub-title text-lg">
+			<text class="cuIcon-likefill text-red margin-right-sm"></text>
+			<text class="text-df">我喜欢的</text>
+		</view>
+		<view class="cu-list grid col-4 no-border" style="padding:0">
+			<block wx:for="{{ likeCount }}" wx:key="index">
+				<view class="cu-item" bindtap="navToLikePage" data-index="{{ index }}">
+					<view class="{{ item.icon }} {{ item.color }}">
+					</view>
+					<text class="text-gray">{{ item.nums==0?'暂无':item.nums }}</text>
+				</view>
+			</block>
+		</view>
+	</view>
+
+	<!-- 关注信息 -->
+	<view class="my-card" bindtap="navToFocusList">
+		<view class="cus-sub-title text-lg">
+			<text class="cuIcon-attentionfavorfill text-orange margin-right-sm"></text>
+			<text class="text-df">我关注的 ({{focuslist.length}})</text>
+		</view>
+		<view class="cu-avatar-group" wx:if="{{ focusList.length!=0 }}">
+			<block wx:for="{{ [0,1,2,3,4,5,6,7,8,9] }}" wx:key="index">
+				<view wx:if="{{ index<focuslist.length }}" class="cu-avatar round lg" style="background-image:url({{focuslist[index].avatarUrl}})"></view>
+			</block>
+		</view>
+
+		<view wx:if="{{ focusList.length == 0 }}" class="text-gray text-sm" style="width:100%; text-align:center;padding:24rpx 0">还没有关注哦</view>
+	</view>
+
+	<!-- 发布 -->
+	<view class="my-card">
+		<view class="cus-sub-title text-lg">
+			<text class="cuIcon-pick text-blue margin-right-sm"></text>
+			<text class="text-df">发布</text>
+		</view>
+		<view class="grid col-3 text-center">
+			<block wx:for="{{ pubList }}" wx:key="index">
+				<navigator class="nav-li shadow {{ item.color }} {{ item.icon }}" url="{{ item.url }}" open-type="navigate" role="navigation">
+					<text style="margin-left:24rpx">{{ item.name }}</text>
+				</navigator>
+			</block>
+		</view>
+	</view>
+
+	<view class="cu-form-group" style="margin-top: 12rpx">
+    <view class="title">更新头像昵称</view>
+    <text class="cuIcon-refresh text-gray"></text>
+	</view>
+	
+	<view class="cu-form-group">
+    <view class="title">功能反馈</view>
+    <text class="cuIcon-question text-gray"></text>
+	</view>
+	
+	<view class="cu-form-group">
+    <view class="title">联系我们</view>
+    <text class="cuIcon-weixin text-gray"></text>
+  </view>
+
+
+
+
+</block>

@@ -1,0 +1,66 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+
+.card {
+  width: 100%;
+  padding: 12rpx 24rpx;
+  margin-top: 12rpx;
+  background-color: white;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-avatar {
+  flex: 1;
+  display: inline-block;
+}
+
+.user-avatar image {
+  width: 54rpx;
+  height: 54rpx;
+  border-radius: 50px;
+}
+
+.nickname {
+  flex: 6;
+  display: inline-block;
+  font-size: 32rpx;
+}
+
+.create-time {
+  flex: 3;
+  display: inline-block;
+  font-size: 24rpx;
+  color: gray;
+  text-align: right;
+}
+
+.body{
+  width: 100%;
+}
+
+.body text{
+  display: -webkit-box;      
+  word-break: break-all;
+  text-overflow: ellipsis;  
+  overflow: hidden;            
+  -webkit-box-orient: vertical;   
+  -webkit-line-clamp: 5; 
+  /* white-space: nowrap;  */
+}
+
+.body {
+  padding: 12rpx 0;
+}
+
+.bottom {
+  text-align: right;
+  font-size: 26rpx;
+  color: gray;
+}

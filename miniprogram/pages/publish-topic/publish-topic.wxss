@@ -1,0 +1,5 @@
+.text-area{
+  background-color: white;
+  margin-top: 12rpx;
+  padding: 24rpx;
+}

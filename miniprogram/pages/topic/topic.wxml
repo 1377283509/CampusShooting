@@ -1,0 +1,52 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<wxs module="res" src="../../utils/res.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<!-- title -->
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">话题</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+<!-- 搜索 -->
+<view class="cu-bar search bg-white">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input placeholder="搜话题" value="{{searchValue}}" type="text" confirm-type="search" bindinput="onInput" bindconfirm="onSearch"></input>
+	</view>
+</view>
+
+<view class='nav-list'>
+	<navigator hover-class='none' url="/pages/topic-details/topic-details?id={{item._id}}" class="nav-li" wx:for="{{topicList}}" style="background-color: {{res.getRandomColor()}}" wx:key="index">
+		<view class="nav-title"># {{item.name}}</view>
+		<view class="nav-name">{{ tutil.formatTime(item.createTime, "yy-mm-dd") }}</view>
+		<text class='cuIcon-magic'></text>
+	</navigator>
+</view>
+
+<!-- 搜索结果 -->
+<view class="cu-modal bottom-modal {{showModal?'show':''}}" style="margin-top: 120rpx">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white">
+			<view class="action">搜索结果</view>
+			<view class="action text-blue" bindtap="hideModal">关闭</view>
+		</view>
+		<view wx:if="{{isLoading}}" class="cu-load bg-white loading"></view>
+		<view wx:if="{{ !isLoading }}" class="bg-white">
+			<view class='nav-list'>
+				<navigator hover-class='none' url="/pages/topic-details/topic-details?id={{item._id}}" class="nav-li" wx:for="{{searchRes}}" style="background-color: {{res.getRandomColor()}}" wx:key="index">
+					<view class="nav-title"># {{item.name}}</view>
+					<view class="nav-name">{{ tutil.formatTime(item.createTime, "yy-mm-dd") }}</view>
+					<text class='cuIcon-magic'></text>
+				</navigator>
+			</view>
+			<block wx:if="{{searchRes.length == 0}}">
+				<tip content="暂无搜索结果"></tip>
+			</block>
+		</view>
+	</view>
+</view>
+
+<tip content="到底了哦"></tip>
+
+<nav-back></nav-back>

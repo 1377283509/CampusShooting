@@ -1,0 +1,21 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+.card{
+  margin-top: 12rpx;
+  padding: 8rpx 24rpx;
+  width: 100%;
+  background-color: white;
+  box-shadow: #f5f5f5 12rpx 12rpx 12rpx;
+}
+
+.top{
+  padding: 12rpx;
+}
+
+.bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12rpx;
+  align-items: center;
+}

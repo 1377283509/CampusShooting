@@ -1,0 +1,4 @@
+.list-card{
+  padding: 18rpx 24rpx;
+  background-color: white;
+}

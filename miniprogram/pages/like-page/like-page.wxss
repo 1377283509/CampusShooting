@@ -1,0 +1,9 @@
+.active-tab {
+  color: #38C098;
+  font-weight: bold;
+}
+
+.list-card{
+  padding: 18rpx 12rpx;
+  background-color: white;
+}

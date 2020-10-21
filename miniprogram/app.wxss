@@ -1,0 +1,35 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
+.pub-margin {
+  margin: 0rpx 18rpx 8rpx 18rpx;
+}
+
+.button {
+  margin: 0 25%;
+  margin-top: 64rpx;
+  width: 50%;
+}
+
+.pub-radius {
+  border-radius: 12rpx;
+}
+
+.active-tab {
+  color: #38C098;
+  font-weight: bold;
+  position: relative;
+}
+
+.active-tab::after{
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: auto;
+  bottom: 16rpx;
+  right: auto;
+  height: 8rpx;
+  width: 36rpx;
+  background-color: #38C098;
+  opacity: 0.3;
+}

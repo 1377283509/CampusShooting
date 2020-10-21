@@ -1,0 +1,34 @@
+	<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+	<view class="card" bindtap="navToDetail" data-id="{{ image._id }}">
+		<!-- 顶部标题和话题 -->
+		<view class="top">
+			<text wx:if="{{ image.topic }}" class="text-orange text-bold margin-right-sm"># {{image.topic}}</text>
+			<text wx:if="{{ image.title }}">{{ image.title }}</text>
+		</view>
+		<!-- 图片 -->
+		<view class="body">
+			<view wx:if="{{ image.images.length == 1 }}" style="width: 100%;height:320rpx">
+				<image src="{{ image.images[0] }}" mode="aspectFill" style="width:100%;height:100%;border-radius:8rpx"></image>
+			</view>
+			<!-- swipper -->
+			<swiper wx:if="{{ image.images.length > 1 }}" class="card-swiper round-dot}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+				<swiper-item wx:for="{{image.images}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+					<view class="swiper-item">
+						<image src="{{item}}" mode="aspectFill"></image>
+					</view>
+				</swiper-item>
+			</swiper>
+		</view>
+		<!-- 发布时间等信息 -->
+		<view class="bottom">
+			<view>
+				<text class="cuIcon-time text-gray margin-right-sm"></text>
+				<text class="text-gray">{{ tutil.formatTime(image.createDate, 'yy-mm-dd', '.') }}</text>
+			</view>
+			<view>
+				<text class="cuIcon-attention text-gray margin-right-sm"> {{image.viewCount}}</text>
+				<text class="cuIcon-like text-gray margin-right-sm"> {{image.likeCount}}</text>
+				<text class="cuIcon-mark text-gray margin-right-sm"> {{ image.commentCount }}</text>
+			</view>
+		</view>
+	</view>

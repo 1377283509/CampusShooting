@@ -1,0 +1,136 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<view style="height:{{ statusBar + 10 }}px;background-color:black"></view>
+<!-- 视频 -->
+<video class="video" src="{{ video.video}}" autoplay="true">
+</video>
+<!-- tab-bar -->
+<scroll-view class="bg-white nav">
+	<view class="flex text-center">
+		<view class="cu-item flex-sub {{currentTab==0?'active-tab':''}}" data-id="0" bindtap="selectTab">详情</view>
+		<view class="cu-item flex-sub {{currentTab==1?'active-tab':''}}" data-id="1" bindtap="selectTab">评论 {{ video.commentCount }}</view>
+	</view>
+</scroll-view>
+
+
+<!-- 视频信息 -->
+<block wx:if="{{ currentTab == 0 }}">
+	<view class="video-info">
+		<!-- 用户信息 -->
+		<view class="user-bar">
+			<view class="user-info" bindtap="navToUserDetail">
+				<view class="cu-avatar lg round" style="background-image:url({{ userInfo.avatarUrl }});">
+				</view>
+				<view class="margin-left">
+					<view class="nickname">{{ userInfo.nickName }}</view>
+					<view class="university">{{ userInfo.university }}</view>
+				</view>
+			</view>
+			<view class="focus-btn {{ hasFocus?'nofocus-color':'focus-color' }}" bindtap="onFocus">
+				<text>{{ hasFocus?'已关注':'关注' }}</text>
+			</view>
+		</view>
+		<!-- 视频信息 -->
+		<view class="video-bar">
+			<!-- 话题 -->
+			<view wx:if="{{ video.topic }}">
+				<text class="topic">{{ '# ' + video.topic }}</text>
+				<text wx:if="{{ !video.title }}" style="margin-left:12rpx;">{{ video.university }}</text>
+			</view>
+			<!-- 文案 -->
+			<view wx:if="{{ video.title }}" class="title">
+				{{ video.title }}
+			</view>
+			<view class="bottom-bar margin-top">
+				<view>
+					<text> {{ video.viewCount }} 次播放</text>
+					<text class="cuIcon-like " style="margin-left:24rpx"></text>
+					<text> {{ video.likeCount }}</text>
+					<text style="margin-left:24rpx"> {{ tutil.formatTime(video.createTime, "yy-mm-dd", "-") }}</text>
+				</view>
+				<view>
+					<text class="cuIcon-location">{{ video.university }}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 推荐视频 -->
+	<block wx:if="{{ !isLoadingVideos }}">
+		<!-- 宣传片 -->
+		<view class="title-card">
+			<view class="sub-title">
+				更多推荐
+			</view>
+		</view>
+		<view class="video-list" wx:if="{{ videos.length!=0 }}">
+			<block wx:for="{{ videos }}" wx:key="index">
+				<video-card video="{{ item }}"></video-card>
+			</block>
+		</view>
+	</block>
+	<view wx:if="{{ currentTab == 0 && !isLoadingVideos }}" class="bottom-tips">到底了哦～</view>
+</block>
+
+<block wx:if="{{ isLoadingVideos }}">
+	<view class="cu-load load-icon loading"></view>
+</block>
+
+<!-- 评论信息 -->
+<block wx:if="{{ currentTab == 1 }}">
+	<view class="comment-list" wx:for="{{ comments }}" wx:key="index">
+		<view class="comment-card" wx:if="{{ item.to == null }}">
+			<!-- 卡片头部 -->
+			<view class="comment-card-top" data-id="{{ item.from.userId }}">
+				<view class="cu-avatar round" bindtap="navToUserDetail" style="background-image:url({{ item.from.userAvatar }});">
+				</view>
+				<view class="margin-left com-info">
+					<view class="com-nickname">{{ item.from.userName }}</view>
+					<view class="com-university">
+						<text>{{ tutil.formatTime(video.createTime, "yy-mm-dd hh:MM:ss")}}</text>
+						<text wx:if="{{ myInfo._id == item.from.userId }}" class="cuIcon-delete margin-left" data-index="{{ index }}" data-id="{{ item._id }}" bindtap="deleteComment"></text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 评论内容 -->
+			<view class="com-body" bindtap="onTapComment"  data-id="{{ item._id }}" data-user="{{ item.from }}">
+				<text>{{ item.value }}</text>
+			</view>
+			<!-- 子评论 -->
+			<view class="child-comments" wx:for-item="com" wx:for-index="idx" wx:for="{{ item.comments }}" wx:key="_id">
+				<view bindtap="onTapComment" data-user="{{com.from}}" data-id="{{item._id}}">
+					<text class="text-blue">{{ myInfo.nickName == com.from.userName?'我':com.from.userName }}</text>
+					<text wx:if="{{ myInfo.nickName!=com.to.userName }}">  回复  </text>
+					<text class="text-blue" wx:if="{{ myInfo.nickName!=com.to.userName }}">@{{ com.to.userName }}</text>
+					<text> : {{ com.value }}</text>
+				</view>
+				<view class="com-university" style="width:100%;text-align:left;margin-top:12rpx">
+					<text>{{ tutil.formatTime(video.createTime, "yy-mm-dd hh:MM:ss")}}</text>
+					<text wx:if="{{ myInfo._id == com.from.userId }}" class="cuIcon-delete margin-left" data-index="{{ index }}" data-idx="{{ idx }}" data-id="{{ com._id }}" bindtap="deleteComment"></text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<tip content="到底了哦"></tip>
+</block>
+
+<!-- 按钮 -->
+<view class="btn-bar" wx:if="{{ currentTab == 0 }}">
+	<button class="cu-btn round bg-red" bindtap="likeHandle"><text class="{{ isLike?'cuIcon-likefill text-white':'cuIcon-like' }}"></text></button>
+	<button class="cu-btn round" open-type="share" style="background-color:#38C098"><text class="cuIcon-share text-white"></text></button>
+	<button class="cu-btn round bg-black" bindtap="navBack"><text class="cuIcon-back_android text-white"></text></button>
+</view>
+
+<view class="comment-bar" style="bottom:{{ keyboardHeight }}px;" wx:if="{{ currentTab == 1 }}">
+	<view class="cu-bar search bg-white">
+		<view class="search-form round">
+			<text class="cuIcon-message lg"></text>
+			<text class="text-blue" wx:if="{{ commentTo!=null }}">@{{ commentTo.userName }}  </text>
+			<input type="text" placeholder="发表评论" focus="{{ keyboardFocus }}" value="{{ commentValue }}" hold-keyboard="true" bindblur='onBlur' bindinput="onInput">
+			</input>
+		</view>
+		<view class="action">
+			<button class="cu-btn round" bindtap="onComment" role="button" style="background-color:#38C098;color:white">发送</button>
+		</view>
+	</view>
+</view>

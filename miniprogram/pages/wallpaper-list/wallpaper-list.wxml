@@ -1,0 +1,33 @@
+<blank-view color="white"></blank-view>
+<!-- title -->
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">壁纸</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+
+<scroll-view class="bg-white nav">
+	<view>
+		<view class="cu-item flex-sub {{curTab==0?'active-tab':''}}" data-id="0" bindtap="selectTab">
+			<text class="cuIcon-time"></text>
+			新品榜</view>
+		<view class="cu-item flex-sub {{curTab==1?'active-tab':''}}" data-id="1" bindtap="selectTab">
+			<text class="cuIcon-hot"></text>
+			热门榜</view>
+			<view class="cu-item flex-sub {{curTab==2?'active-tab':''}}" data-id="2" bindtap="selectTab">
+			<text class="cuIcon-down"></text>
+			下载榜</view>
+	</view>
+</scroll-view>
+
+<view class="flex flex-wrap justify-between padding-sm bg-white">
+	<block wx:for="{{ curTab==0?newList:curTab==1?hotList:downList }}" wx:key="index">
+		<block wx:for="{{ item.images }}" wx:for-key="idx" wx:for-item="url" wx:key="idx">
+			<image class="img margin-bottom-sm bg-red" src="{{url}}" mode="aspectFill" style="width: 49%; height:650rpx; border-radius:12rpx" bindtap="navToDetail" data-id="{{ item._id }}"></image>
+		</block>
+	</block>
+</view>
+
+<tip content="到底了哦"></tip>
+<nav-back></nav-back>

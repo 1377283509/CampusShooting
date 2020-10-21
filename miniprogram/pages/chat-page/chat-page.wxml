@@ -1,0 +1,50 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<scroll-view scroll-y="true" class="scroll-view" scroll-into-view="{{ last }}" style="padding-bottom: {{ 50+keyboardHeight }}px">
+	<view id="item{{ index }}" class="cu-chat" wx:for="{{ msgList }}" wx:key="index">
+		<!-- 我发送 -->
+		<view class="cu-item self" wx:if="{{ item.from==myInfo.id }}">
+			<view class="main">
+				<view class="content bg-green">
+					<text wx:if="{{ item.type == 'text' }}">{{ item.content }}</text>
+					<image bindtap="tapImage" data-url="{{ item.content }}" wx:if="{{ item.type == 'image' }}" mode="widthFit" src="{{ item.content }}"></image>
+				</view>
+				<view class="date">{{ tutil.formatTime(item.time, 'yy-mm-dd hh:MM:ss') }}</view>
+			</view>
+			<view class="cu-avatar round" style="background-image:url({{myInfo.avatarUrl}})"></view>
+		</view>
+		<!-- 对方发送 -->
+		<view class="cu-item" wx:else>
+			<view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})"></view>
+			<view class="main">
+				<view class="content bg-white">
+					<text wx:if="{{ item.type == 'text' }}">{{ item.content }}</text>
+					<image bindtap="tapImage" data-url="{{ item.content }}" wx:if="{{ item.type == 'image' }}" mode="widthFit" src="{{ item.content }}"></image>
+				</view>
+			</view>
+			<view class="date">{{ tutil.formatTime(item.time, 'yy-mm-dd hh:MM:ss') }}</view>
+		</view>
+	</view>
+</scroll-view>
+
+
+<!-- bottom -->
+<view class="bottom-bar" style="bottom:{{ showMenuCard?menusHeight:0 }}px">
+	<view class="icon-btn" bindtap="showMenuCard">
+		<text class="cuIcon-roundadd text-grey"></text>
+	</view>
+	<input class="input" value="{{ content }}" bindinput="onInput" bindconfirm="sendMessage"></input>
+	<view class="icon-btn" bindtap="sendMessage">
+		<text class="cuIcon-pullright text-grey"></text>
+	</view>
+</view>
+
+<!-- menu card -->
+<view wx:if="{{ showMenuCard }}" class="menu-card" bindtap="click">
+	<block wx:for="{{ menus }}" wx:key="index">
+		<view class="menu" bindtap="{{ item.handler }}">
+			<image class="menu-image" mode="aspectFit" src="{{ item.url }}">
+			</image>
+			<view class="menu-text">{{ item.name }}</view>
+		</view>
+	</block>
+</view>

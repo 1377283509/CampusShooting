@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "video-card":"/components/video-card/video-card"
+  },
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true
+}

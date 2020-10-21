@@ -1,0 +1,196 @@
+.video {
+  width: 100%;
+  height: 375rpx;
+}
+
+.icon-back {
+  position: fixed;
+  left: 24px;
+  font-size: 36rpx;
+  color: lightgray;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50px;
+}
+
+.active-tab {
+  color: #38C098;
+}
+
+.video-info {
+  margin-top: 12rpx;
+  padding: 24rpx 24rpx 12rpx 24rpx;
+  width: 100%;
+  background-color: white;
+}
+
+.user-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nickname {
+  font-size: 32rpx;
+  color: black;
+}
+
+.university {
+  font-size: 24rpx;
+  color: gray;
+}
+
+.focus-btn {
+  color: white;
+  padding: 6rpx 24rpx;
+  border-radius: 50rpx;
+  width: 130rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 48rpx;
+  font-size: 24rpx;
+}
+
+.focus-color {
+  background-color: #38C098;
+}
+
+.nofocus-color {
+  background-color: lightgray;
+}
+
+.video-bar {
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.topic {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #38C098;
+}
+
+.title {
+  font-size: 24rpx;
+  color: gray;
+}
+
+.bottom-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  color: gray;
+  font-size: 24rpx;
+}
+
+.btn-bar{
+  position: fixed;
+  bottom: 32rpx;
+  margin-top: 12rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 12rpx 0;
+}
+
+.btn-bar button{
+  margin-right: 24rpx;
+  font-size: 42rpx;
+}
+
+.video-list{
+  background-color: white;
+  padding: 8rpx 24rpx;
+}
+
+.comment-list{
+  margin-top: 1rpx;
+}
+
+.comment-bar{
+  width: 100%;
+  position: fixed;
+  height: 50px;
+  z-index: 1;
+}
+
+.comment-card{
+  margin-top: 12rpx 0;
+  padding: 24rpx 24rpx;
+  background-color: white;
+}
+
+.comment-card-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.com-user-avatar{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50px;
+}
+
+.com-info{
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.com-nickname{
+  font-size: 28rpx;
+  color: dimgrey;
+}
+
+.com-university{
+  color: gray;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.com-body{
+  padding: 16rpx 24rpx 16rpx 0rpx;
+  color: dimgrey;
+  width: 100%;
+}
+
+.child-comments{
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 12rpx 12rpx;
+  font-size: 26rpx;
+}
+.title-card{
+  margin-top: 12rpx;
+  padding: 12rpx 18rpx;
+  background-color: white;
+}
+.sub-title{
+  padding: 0 24rpx;
+  background-color: white;
+  border-left: red 12rpx solid;
+}

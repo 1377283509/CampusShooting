@@ -1,0 +1,34 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+.video-card{
+  padding: 8rpx 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-img{
+  width: 265rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+}
+
+.right-info{
+  padding-top: 12rpx;
+  width: 420rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.bottom-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  color: gray;
+  font-size: 24rpx;
+}

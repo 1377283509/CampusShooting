@@ -1,0 +1,11 @@
+<view style="width:714rpx;margin: 0 18rpx">
+	<swiper indicator-dots="true" indicator-color="#f5f5f5" indicator-active-color="white" autoplay="true">
+		<block wx:for="{{ swiperList }}" wx:key="index">
+			<swiper-item>
+				<image class="image" src="{{ item.cover}}" mode="aspectFill" bindtap="navToWebPage" data-url="{{ item.url }}"></image>
+				<!-- 标签 -->
+				<view class="tag" style="background-color: {{ index%2==0?'#7986cb':'#4db6ac' }}">{{ item.tag }}</view>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>

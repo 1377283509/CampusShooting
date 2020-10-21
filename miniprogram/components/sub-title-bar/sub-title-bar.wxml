@@ -1,0 +1,9 @@
+<view class="title">
+	<view class="title-name">
+		<text>{{title}}</text>
+	</view>
+	<view wx:if="{{ !hideMore }}" class="title-more" bindtap="navToMore">
+		更多
+		<text class="cuIcon-right"></text>
+	</view>
+</view>

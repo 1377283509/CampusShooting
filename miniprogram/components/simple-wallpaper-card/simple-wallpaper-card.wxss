@@ -1,0 +1,23 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+.card{
+  width: 280rpx;
+  height: 420rpx;
+  display: inline-block;
+  position: relative;
+  margin-left: 12rpx;
+}
+
+.card-image{
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+.like-count{
+  position: absolute;
+  bottom: 6rpx;
+  right: 12rpx;
+  color: white;
+  font-size: 22rpx;
+}

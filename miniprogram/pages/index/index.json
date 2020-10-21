@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "video-swiper": "/components/video-swiper/video-swiper",
+    "image-card": "/components/image-card/image-card",
+    "video-card":"/components/video-card/video-card",
+    "theme-card": "/components/theme-card/theme-card",
+    "simple-image-card": "/components/simple-image-card/simple-image-card",
+    "simple-video-card": "/components/simple-video-card/simple-video-card",
+    "skill-card": "../../components/simple-skill-card/simple-skill-card",
+    "simple-wallpaper-card": "../../components/simple-wallpaper-card/simple-wallpaper-card"
+  },
+  "navigationStyle": "custom"
+}

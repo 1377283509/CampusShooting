@@ -1,0 +1,20 @@
+	<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+	<view class="video-card" bindtap="navToDetails">
+		<!-- 左边图片 -->
+		<image class="left-img" src="{{ video.cover }}"></image>
+		<!-- 右边内容 -->
+		<view class="right-info">
+			<view>
+				<text class="text-orange">{{ '# ' + video.topic }}</text>
+				<text style="margin-left:12rpx">{{video.university}}</text>
+			</view>
+			<view wx:if="{{ video.title }}" style="color:gray;font-size:24rpx">
+				{{ video.title }}
+			</view>
+			<view class="bottom-bar">
+				<view><text class="cuIcon-video"> {{ video.viewCount }}</text>
+					<text class="cuIcon-like" style="margin-left:24rpx"> {{ video.likeCount }}</text></view>
+				<text >{{ tutil.formatTime(video.createTime, "yy-mm-dd", "-") }}</text>
+			</view>
+		</view>
+	</view>

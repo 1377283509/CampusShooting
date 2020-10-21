@@ -1,0 +1,19 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+.title{
+  padding: 16rpx 24rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-name{
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.title-more{
+  font-size: 26rpx;
+}

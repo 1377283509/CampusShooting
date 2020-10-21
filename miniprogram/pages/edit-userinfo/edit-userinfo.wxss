@@ -1,0 +1,9 @@
+.university{
+  margin-top: 12rpx;
+}
+
+.introduction{
+  background-color: white;
+  padding: 24rpx;
+  margin-top: 12rpx;
+}

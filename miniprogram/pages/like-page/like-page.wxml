@@ -1,0 +1,29 @@
+<scroll-view class="bg-white nav">
+	<view class="flex flex-center">
+		<block wx:for="{{tabList}}" wx:key="index">
+			<view class="cu-item flex-sub {{curTab==index?'active-tab':''}}" data-id="{{index}}" bindtap="selectTab">
+				<text class="{{item.icon}}"></text>
+				{{item.name}}
+			</view>
+		</block>
+	</view>
+</scroll-view>
+
+<block wx:if="{{ curTab == 0 }}">
+	<block wx:for="{{imageList}}" wx:key="index">
+		<image-card image="{{item}}"></image-card>
+	</block>
+</block>
+
+<!-- 视频列表 -->
+<block wx:if="{{ curTab == 1 }}">
+	<view class="list-card">
+		<block wx:for="{{ videoList }}" wx:key="index">
+			<video-card video="{{ item }}"></video-card>
+		</block>
+	</view>
+</block>
+
+<tip content="到底了哦"></tip>
+
+

@@ -1,0 +1,9 @@
+<view class="card" bindtap="navToDetail" data-url="{{skill.url}}">
+	<image class="card-image" src="{{skill.cover}}" mode="aspectFill"></image>
+	<view class="card-tag">
+		{{skill.tag}}
+	</view>
+	<view class="card-title">
+		{{skill.title}}
+	</view>
+</view>

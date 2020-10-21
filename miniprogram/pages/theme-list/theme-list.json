@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "theme-card": "../../components/theme-card/theme-card"
+  },
+  "navigationStyle": "custom"
+}

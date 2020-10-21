@@ -1,0 +1,3 @@
+<view class="nav-back" bindtap="navBack">
+	<button class="cu-btn round bg-black text-xxl"><text class="cuIcon-back_android text-white"></text></button>
+</view>

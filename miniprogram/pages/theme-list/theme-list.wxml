@@ -1,0 +1,59 @@
+<blank-view color="white"></blank-view>
+<!-- title -->
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">主题</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+<!-- 搜索 -->
+<view class="cu-bar search bg-white">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input placeholder="搜主题" type="text" value="{{searchValue}}" confirm-type="search" bindinput="onInput" bindconfirm="onSearch"></input>
+	</view>
+</view>
+
+<!-- 当前主题 -->
+<view class="cu-bar bg-white">
+	<view class="action">
+		<text class="cuIcon-colorlens text-orange"></text>
+		<text class="text-df text-bold">本周主题</text>
+	</view>
+</view>
+<theme-card theme="{{curTheme}}" isNew="true"></theme-card>
+
+
+<!-- 往期主题 -->
+<view class="cu-bar bg-white">
+	<view class="action">
+		<text class="cuIcon-time text-gray"></text>
+		<text class="text-df text-bold">往期主题</text>
+	</view>
+</view>
+<block wx:for="{{ themeList }}" wx:key="index">
+	<theme-card theme="{{item}}"></theme-card>
+</block>
+
+<!-- 搜索结果 -->
+<view class="cu-modal bottom-modal {{showModal?'show':''}}" style="margin-top: 120rpx">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white">
+			<view class="action">搜索结果</view>
+			<view class="action text-blue" bindtap="hideModal">关闭</view>
+		</view>
+		<view wx:if="{{isLoading}}" class="cu-load bg-white loading"></view>
+		<view wx:if="{{ !isLoading }}" class="bg-white">
+			<block wx:for="{{searchRes}}" wx:key="index">
+				<theme-card theme="{{ item }}"></theme-card>
+			</block>
+			<block wx:if="{{searchRes.length == 0}}">
+				<tip content="暂无搜索结果"></tip>
+			</block>
+		</view>
+	</view>
+</view>
+
+
+<tip content="到底了哦"></tip>
+<nav-back></nav-back>

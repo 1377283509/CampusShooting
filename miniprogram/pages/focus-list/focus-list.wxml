@@ -1,0 +1,38 @@
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">关注</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+<!-- 搜索 -->
+<view class="cu-bar search bg-white">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input placeholder="搜索" type="text" confirm-type="search" bindinput="onInput" bindconfirm="onSearch"></input>
+	</view>
+</view>
+
+<view class="cu-list menu-avatar">
+	<block wx:for="{{ focuslist }}" wx:key="index">
+		<view class="cu-item">
+			<view class="cu-avatar round lg" bindtap="navToUserDetail" data-id="{{ item._id }}" style="background-image:url({{ item.avatarUrl }})"></view>
+			<view class="content">
+				<view class="text-cut">
+					{{item.nickName}}
+					<view class="cu-capsule round">
+						<view class="cu-tag bg-gradual-orange sm">粉丝 {{ item.fans }}</view>
+					</view>
+				</view>
+				<view class="text-cut">
+					<image src="../../static/icons/{{ item.gender=='男'?'male.png':'female.png' }}" style="width:24rpx;height:24rpx">
+					</image>
+					{{ item.university }}
+				</view>
+			</view>
+			<view bindtap="navToChat" data-index="{{ index }}" class="action cu-btn round sm" style="margin-right: 16rpx">私信</view>
+		</view>
+	</block>
+</view>
+
+<nav-back></nav-back>

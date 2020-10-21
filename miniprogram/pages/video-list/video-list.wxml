@@ -1,0 +1,50 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<wxs module="res" src="../../utils/res.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<!-- title -->
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">视频</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+
+<view class="cu-bar search bg-white">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input placeholder="搜视频" type="text" confirm-type="search"></input>
+	</view>
+</view>
+
+<scroll-view class="bg-white nav">
+	<view>
+		<view class="cu-item flex-sub {{curTab==0?'active-tab':''}}" data-id="0" bindtap="selectTab">
+			<text class="cuIcon-time"></text>
+			最新</view>
+		<view class="cu-item flex-sub {{curTab==1?'active-tab':''}}" data-id="1" bindtap="selectTab">
+			<text class="cuIcon-hot"></text>
+			最热</view>
+	</view>
+</scroll-view>
+
+<block wx:if="{{curTab == 0}}">
+	<view class="list-card">
+		<block wx:for="{{ videoList }}" wx:key="index">
+			<video-card video="{{ item }}"></video-card>
+		</block>
+	</view>
+</block>
+
+<block wx:if="{{curTab == 1}}">
+	<view class="list-card">
+		<block wx:for="{{ hotVideoList }}" wx:key="index">
+			<video-card video="{{ item }}"></video-card>
+		</block>
+	</view>
+</block>
+
+
+
+<view class="cu-load bg-white {{isLoading?'loading':''}}"></view>
+<tip content="到底了哦"></tip>
+<nav-back></nav-back>

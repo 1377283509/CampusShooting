@@ -1,0 +1,7 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+.nav-back{
+  position: fixed;
+  bottom: 24rpx;
+  right: 24rpx;
+}

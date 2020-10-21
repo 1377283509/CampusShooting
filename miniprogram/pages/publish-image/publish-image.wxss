@@ -1,0 +1,14 @@
+.input{
+  margin-top: 12rpx;
+}
+
+.text-area{
+  background-color: white;
+  padding: 24rpx;
+  margin-top: 12rpx;
+}
+
+.button{
+  margin: 64rpx 25%;
+  width: 50%;
+}

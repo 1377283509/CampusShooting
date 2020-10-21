@@ -1,0 +1,52 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+.sub-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12rpx 18rpx;
+  align-items: flex-end;
+}
+
+.sub-title :first-child{
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #404048;
+}
+
+.sub-title:last-child{
+  font-size: 20rpx;
+  color: #1A1A1A;
+}
+
+
+.video-card{
+  width: 100%;
+  height: 100%;
+}
+
+.image-style{
+  display: block;
+  width: 600rpx;
+  height: 300rpx;
+  border-radius: 12rpx;
+}
+
+.university{
+  padding: 6rpx 12rpx;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 20rpx;
+  font-weight: bold;
+  letter-spacing: 1px;
+  position: fixed;
+  bottom: 0rpx;
+}
+
+.play{
+  font-size: 42rpx;
+  position: fixed;
+  top: 130rpx;
+  color: whitesmoke;
+  left: 290rpx;  
+}

@@ -1,0 +1,81 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user-info/user-info",
+    "pages/archive/archive",
+    "pages/university/university",
+    "pages/edit-userinfo/edit-userinfo",
+    "pages/university-list/university",
+    "pages/publish-image/publish-image",
+    "pages/publish-video/publish-video",
+    "pages/publish-wallpaper/publish-wallpaper",
+    "pages/publish-topic/publish-topic",
+    "pages/topic-list/topic-list",
+    "pages/topic-details/topic-details",
+    "pages/message-list/message-list",
+    "pages/video-details/video-details",
+    "pages/userDetail/userDetail",
+    "components/nav-back/nav-back",
+    "pages/focus-list/focus-list",
+    "pages/chat-page/chat-page",
+    "pages/like-page/like-page",
+    "pages/publish-appointment/publish-appointment",
+    "pages/theme-list/theme-list",
+    "pages/topic/topic",
+    "pages/skill-list/skill-list",
+    "pages/wallpaper-list/wallpaper-list",
+    "pages/web-page/web-page",
+    "pages/publish-history/publish-history",
+    "pages/image-detail/image-detail",
+    "pages/video-list/video-list",
+    "pages/wallpaper-detail/wallpaper-detail",
+    "pages/theme-products/theme-products",
+    "pages/search-result/search-result",
+    "pages/image-list/image-list"
+  ],
+  "window": {
+    "navigationStyle": "default",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "backgroundColor": "#F0F0F0",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "",
+        "iconPath": "static/icons/home.png",
+        "selectedIconPath": "static/icons/home-g.png"
+      },
+      {
+        "pagePath": "pages/university/university",
+        "text": "",
+        "iconPath": "static/icons/school.png",
+        "selectedIconPath": "static/icons/school-g.png"
+      },
+      {
+        "pagePath": "pages/message-list/message-list",
+        "text": "",
+        "iconPath": "static/icons/message.png",
+        "selectedIconPath": "static/icons/message-g.png"
+      },
+      {
+        "pagePath": "pages/user-info/user-info",
+        "text": "",
+        "iconPath": "static/icons/user.png",
+        "selectedIconPath": "static/icons/user-g.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
+    "search-bar": "/components/search-bar/search-bar",
+    "cus-swiper": "/components/cus-swiper/cus-swiper",
+    "tip": "/components/tip/tip",
+    "blank-view": "/components/blank-view/blank-view",
+    "nav-back": "/components/nav-back/nav-back",
+    "sub-title-bar": "/components/sub-title-bar/sub-title-bar"
+  },
+  "sitemapLocation": "sitemap.json"
+}

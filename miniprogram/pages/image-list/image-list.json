@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "image-card": "../../components/image-card/image-card"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,66 @@
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">大学</text>
+		<text class="bg-red"></text>
+	</view>
+</view>
+
+<view class="cu-list menu">
+	<view class="cu-item" style="background-color:#38C098">
+		<view class="content">
+			<text class="cuIcon-locationfill text-white"></text>
+			<text class="text-df text-white">{{ university==null?'未选择大学':university }}</text>
+		</view>
+		<view class="action" bindtap="selectSchool">
+			<view class="cu-tag bg-gray round df">
+				<text class="cuIcon-order text-black"></text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<scroll-view class="bg-white nav">
+	<view>
+		<block wx:for="{{ tabList }}" wx:key="index">
+			<view class="cu-item flex-sub {{curTab==index?'active-tab':''}}" data-id="{{index}}" bindtap="selectTab">
+				<text class="{{ item.icon }}"></text>
+				{{item.name}}
+			</view>
+		</block>
+	</view>
+</scroll-view>
+
+<!-- 动态 -->
+
+<block wx:if="{{curTab == 0}}" wx:for="{{imageList}}" wx:key="index">
+	<image-card image="{{item}}"></image-card>
+</block>
+
+<!-- 视频 -->
+<block wx:if="{{ curTab == 1 }}">
+	<view class="list-card">
+		<block wx:for="{{ videoList }}" wx:key="index">
+			<video-card video="{{ item }}"></video-card>
+		</block>
+	</view>
+</block>
+
+<!-- 约拍 -->
+<block wx:if="{{ curTab == 2 }}">
+	<block wx:for="{{ appointmentList }}" wx:key="index">
+		<appointment-card appointment="{{ item }}"></appointment-card>
+	</block>
+</block>
+
+<!-- 壁纸 -->
+<view class="flex flex-wrap justify-between padding-sm bg-white" wx:if="{{ curTab == 3 }}">
+	<block wx:for="{{ wallpaperList }}" wx:key="index">
+		<block wx:for="{{ item.images }}" wx:for-key="idx" wx:for-item="url" wx:key="idx">
+			<image class="img margin-bottom-sm bg-red" src="{{url}}" mode="aspectFill" style="width: 49%; height:650rpx; border-radius:12rpx" bindtap="navToWallpaperDetail" data-id="{{ item._id }}"></image>
+		</block>
+	</block>
+</view>
+
+<view class="cu-load bg-white {{isLoading?'loading':''}}"></view>
+<tip wx:if="{{!isLoading}}" content="到底了哦"></tip>

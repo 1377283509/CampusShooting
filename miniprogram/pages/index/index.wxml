@@ -1,0 +1,90 @@
+<wxs module="res" src="../../utils/res.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<!-- 标题 -->
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">首页</text>
+		<text class="bg-red"></text>
+	</view>
+</view>
+<!-- 搜索 -->
+<search-bar></search-bar>
+<!-- 轮播 -->
+<view style="width:100%; background-color:white; padding: 10rpx 0">
+	<cus-swiper swiperList="{{ swiperList }}"></cus-swiper>
+</view>
+
+<sub-title-bar title="校园动态" moreUrl="/pages/image-list/image-list"></sub-title-bar>
+<view style="padding: 12rpx 0;background-color:white">
+	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
+		<block wx:for="{{imageList}}" wx:key="index">
+			<simple-image-card image="{{item}}"></simple-image-card>
+		</block>
+	</scroll-view>
+</view>
+
+<!-- 热门话题 -->
+<view class="bg-white" style="padding: 12rpx 12rpx;">
+	<scroll-view scroll-x="true">
+		<view style="display:flex;flex-direction:row">
+			<view class="padding-xs" style="display:inline-block">
+				<view class="cu-tag round bg-orange">热门话题</view>
+			</view>
+			<block wx:for="{{topicList}}" wx:key="index">
+				<view class="padding-xs" style="display:inline-block" bindtap="navToTopicDetail" data-id="{{item._id}}">
+					<view class="cu-tag round">{{ item.name }}</view>
+				</view>
+			</block>
+				<view class="padding-xs" style="display:inline-block" bindtap="navToTopicList">
+				<view class="cu-tag round">更多</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>
+
+<sub-title-bar title="热门视频" moreUrl="/pages/video-list/video-list"></sub-title-bar>
+<view style="padding: 12rpx 0;background-color:white">
+	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
+		<block wx:for="{{hotVideos}}" wx:key="index">
+			<simple-video-card video="{{item}}" color="{{ index%2==0?'#7986cb':'#4db6ac' }}"></simple-video-card>
+		</block>
+	</scroll-view>
+</view>
+
+
+<sub-title-bar title="最新技巧" moreUrl="/pages/skill-list/skill-list"></sub-title-bar>
+<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
+	<block wx:for="{{skillList}}" wx:key="index">
+		<skill-card skill="{{item}}"></skill-card>
+	</block>
+</scroll-view>
+
+
+<sub-title-bar title="校园宣传" moreUrl=""></sub-title-bar>
+<video-swiper videoList="{{ promotionalVideos }}" detailUrl="/pages/video-details/video-details" moreUrl="/pages/video-list/video-list">
+</video-swiper>
+
+<sub-title-bar title="热门壁纸" moreUrl="/pages/wallpaper-list/wallpaper-list"></sub-title-bar>
+<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
+	<block wx:for="{{wallpapers}}" wx:key="index">
+		<simple-wallpaper-card wallpaper="{{item}}"></simple-wallpaper-card>
+	</block>
+</scroll-view>
+
+<sub-title-bar title="热门学校" moreUrl="" hideMore="true"></sub-title-bar>
+<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx;background-color:white">
+	<block wx:for="{{schoolList}}" wx:key="index">
+		<view class="school-base" data-name="{{ item.name }}" bindtap="onSelectSchool">
+			<view class="school-card">
+				<!-- logo -->
+				<view class="school-logo">
+					<image src="{{item.logo}}"></image>
+				</view>
+				<!-- name -->
+				<text class="school-name">{{item.name}}</text>
+			</view>
+		</view>
+	</block>
+</scroll-view>
+
+<tip content="到底了"></tip>

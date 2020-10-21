@@ -1,0 +1,224 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "appid": "wx6dd7d07961ea5906",
+  "projectname": "%E6%A0%A1%E6%8B%8D",
+  "libVersion": "2.12.1",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "我的",
+          "pathName": "pages/user-info/user-info",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "编辑用户信息",
+          "pathName": "pages/edit-userinfo/edit-userinfo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "选择大学",
+          "pathName": "pages/university-list/university",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发布图片",
+          "pathName": "pages/publish-image/publish-image",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发布视频",
+          "pathName": "pages/publish-video/publish-video",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "视频详情页",
+          "pathName": "pages/video-details/video-details",
+          "query": "id=1e7d2dbd5f3e62e8000002d173ac15bf",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "消息列表",
+          "pathName": "pages/message-list/message-list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "关注列表",
+          "pathName": "pages/focus-list/focus-list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "聊天界面",
+          "pathName": "pages/chat-page/chat-page",
+          "query": "userName=测试&avatarUrl=1&id=1",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "关注列表",
+          "pathName": "pages/focus-list/focus-list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "消息列表",
+          "pathName": "pages/message-list/message-list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "大学",
+          "pathName": "pages/university/university",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "主题列表",
+          "pathName": "pages/theme-list/theme-list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发布历史",
+          "pathName": "pages/publish-history/publish-history",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 16,
+          "name": "图片细节",
+          "pathName": "pages/image-detail/image-detail",
+          "query": "id=55aebe8c5f60803200041a0140411114",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "技巧列表",
+          "pathName": "pages/skill-list/skill-list",
+          "query": "id=55aebe8c5f60803200041a0140411114",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "话题列表",
+          "pathName": "pages/topic/topic",
+          "query": "id=55aebe8c5f60803200041a0140411114",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "话题详情",
+          "pathName": "pages/topic-details/topic-details",
+          "query": "id=b5416b755f5edd7701b70c3e6a860214",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "视频列表",
+          "pathName": "pages/video-list/video-list",
+          "query": "id=b5416b755f5edd7701b70c3e6a860214",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "壁纸列表",
+          "pathName": "pages/wallpaper-list/wallpaper-list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发布约拍",
+          "pathName": "pages/publish-appointment/publish-appointment",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "动态列表",
+          "pathName": "pages/image-list/image-list",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

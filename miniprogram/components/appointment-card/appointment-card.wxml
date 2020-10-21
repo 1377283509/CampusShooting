@@ -1,0 +1,16 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<view class="card">
+	<view class="top" wx:if="{{ !hideUser }}">
+		<view class="user-avatar">
+			<image src="{{appointment.user[0].avatarUrl}}" mode="aspectFill"></image>
+		</view>
+		<view class="nickname">{{appointment.user[0].nickName}}</view>
+		<view class="create-time">{{ tutil.formatTime(appointment.createTime, "yy-mm-dd", ".") }}</view>
+	</view>
+	<view class="body">
+		<text>{{appointment.content}}</text>
+	</view>
+	<view class="bottom">
+		{{appointment.commentCount}}人参与了评论
+	</view>
+</view>

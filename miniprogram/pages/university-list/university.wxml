@@ -1,0 +1,18 @@
+<view class="cu-bar bg-white search">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input placeholder="请输入搜索的关键词" auto-focus="true" type="text" bindinput="onInput"></input>
+  </view>
+</view>
+
+
+<block wx:for="{{ list }}" wx:key="index">
+  <view class="cu-form-group" data-name="{{item.name}}" bindtap="onTap">
+    <view class="title">{{ item.name }}</view>
+    <text class="cuIcon-right text-gray"></text>
+  </view>
+</block>
+
+<view wx:if="{{ list.length==0 }}" style="text-align:center;padding:24rpx">
+  无搜索结果
+</view>

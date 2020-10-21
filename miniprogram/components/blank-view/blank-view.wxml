@@ -1,0 +1,1 @@
+<view style="height:{{ statusBar }}px;background-color:{{color}};z-index:1"></view>

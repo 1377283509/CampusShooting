@@ -1,0 +1,28 @@
+.card{
+  width: 100%;
+  height: max-content;
+  background-color: white;
+  padding: 12rpx 24rpx;
+  border-radius: 8rpx;
+}
+
+.card-image{
+  width: 100%;
+  height: 320rpx;
+  position: relative;
+}
+
+.card-image image{
+  border-radius: 8rpx;
+}
+
+.image-text{
+  width: 100%;
+  position: absolute;
+  padding: 12rpx 24rpx;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.32);
+  color: white;
+  border-radius: 8rpx;
+}

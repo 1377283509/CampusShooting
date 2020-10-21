@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "video-card": "../../components/video-card/video-card"
+  },
+  "navigationBarTitleText": "我喜欢的"
+}
