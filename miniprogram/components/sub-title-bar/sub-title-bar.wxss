@@ -1,7 +1,7 @@
 @import "../../colorui/main.wxss";
 @import "../../colorui/icon.wxss";
 .title{
-  padding: 16rpx 24rpx;
+  padding: 12rpx 24rpx;
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -10,8 +10,8 @@
 }
 
 .title-name{
-  font-size: 30rpx;
-  font-weight: 600;
+  font-size: 32rpx;
+  font-weight: 800;
 }
 
 .title-more{

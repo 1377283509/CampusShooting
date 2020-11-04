@@ -1,66 +1,85 @@
-// miniprogram/pages/userDetail/userDetail.js
+const cloud = require("../../utils/cloud.js")
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    userInfo: null,
+    medals: [],
+    hasFocus: false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  navToChat(){
+    let user = this.data.userInfo
+    wx.navigateTo({
+      url: `../chat-page/chat-page?id=${user._id}&avatarUrl=${user.avatarUrl}&userName=${user.nickName}`,
+    })
+  },
+
+  // 加载用户信息
+  async getUserInfo(id){
+    var res = await cloud.callFunction("user", {
+      $url: "getUserInfo",
+      id: id
+    },true)
+    this.setData({
+      userInfo:res[0]
+    })
+  },
+
+  // 加载勋章信息
+  async getMedals(id){
+    var res = await cloud.callFunction("medal", {
+      $url: "getMedals",
+      id: id
+    })
+    this.setData({
+      medals: res
+    })
+  },
+
+  // 导航到作品页
+  navToProductList(e){
+    var id = this.data.userInfo._id
+    console.log(id)
+    wx.navigateTo({
+      url: '../product-list/product-list?id=' + id,
+    })
+  },
+
+  // 判断是否关注
+  async getFocus(id){
+    var res = await cloud.callFunction("user", {
+      $url: "isFocus",
+      id: id
+    })
+    this.setData({
+      hasFocus: res
+    })
+  },
+
+  // 点击关注
+  async onTapButton(e){
+    var id = this.data.userInfo._id
+    var hasFocus = this.data.hasFocus
+    var res = await cloud.callFunction("user", {
+      $url: hasFocus?"removeFocus":"addFocus",
+      id: id
+    })
+    this.setData({
+      hasFocus: !hasFocus
+    })
+    wx.showToast({
+      title: res,
+      icon: 'none'
+    })
+  },
+
   onLoad: function (options) {
     let id = options.id
-    console.log(id)
+    this.getUserInfo(id)
+    this.getMedals(id)
+    this.getFocus(id)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }

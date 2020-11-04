@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statusBar: app.globalData.StatusBar,
     userInfo: undefined,
     focuslist: [],
+    medals: [],
     likeCount: [{
         icon: "cuIcon-camerafill",
         color: "text-green",
@@ -33,43 +33,42 @@ Page({
         nums: ""
       },
     ],
-    pubList: [{
-        name: "照片",
-        url: "../publish-image/publish-image",
-        color: "bg-green",
-        icon: "cuIcon-camera"
+
+    publishCount: [
+      {
+        icon: "cuIcon-camerafill",
+        color: "text-green",
+        name: "动态",
+        nums: 0
       },
       {
+        icon: "cuIcon-videofill",
+        color: "text-purple",
         name: "视频",
-        url: "../publish-video/publish-video",
-        color: "bg-purple",
-        icon: "cuIcon-video"
+        nums: 0
       },
       {
+        icon: "cuIcon-friendfill",
+        color: "text-blue",
         name: "约拍",
-        url: "../publish-appointment/publish-appointment",
-        color: "bg-blue",
-        icon: "cuIcon-group"
+        nums: 0
       },
       {
+        icon: "cuIcon-picfill",
+        color: "text-red",
         name: "壁纸",
-        url: "../publish-wallpaper/publish-wallpaper",
-        color: "bg-red",
-        icon: "cuIcon-pic"
-      },
-      {
-        name: "话题",
-        url: "../publish-topic/publish-topic",
-        icon: "cuIcon-magic",
-        color: "bg-orange"
-      },
-      {
-        name: "我发布的",
-        url: "../publish-history/publish-history",
-        icon: "cuIcon-time",
-        color: "bg-gray"
+        nums: 0
       },
     ]
+
+  },
+
+  // 导航去发布页
+  navToPublishHistory(){
+    var id = this.data.userInfo._id
+    wx.navigateTo({
+      url: '../publish-history/publish-history?id' + id,
+    })
   },
 
   // 导航去喜欢页
@@ -130,18 +129,10 @@ Page({
     })
   },
 
+  // 导航到关注页
   navToFocusList() {
     wx.navigateTo({
       url: '../focus-list/focus-list',
-    })
-  },
-
-  navToUserDetail(e) {
-    let {
-      id
-    } = e.currentTarget.dataset
-    wx.navigateTo({
-      url: "../userDetail/userDetail?id=" + id,
     })
   },
 
@@ -175,20 +166,39 @@ Page({
       })
   },
 
+  // 获取勋章
+  async getMedals(id){
+    var res = await cloud.callFunction("medal", {
+      $url: "getMedals",
+      id: id
+    })
+    this.setData({
+      medals: res
+    })
+  },
+
   onLoad: function (options) {
+    var publishCount = this.data.publishCount
+    wx.getStorage({
+      key: 'userInfo',
+      success: user => {
+        publishCount[0].nums = user.data.imageCount
+        publishCount[1].nums = user.data.videoCount
+        publishCount[2].nums = user.data.appointmentCount
+        publishCount[3].nums = user.data.wallpaperCount
+        this.getMedals(user.data._id)
+        this.setData({
+          userInfo: user.data,
+          publishCount: publishCount
+        })
+      }
+    })
     this.getFocusList()
     this.getLikeCount()
   },
 
   onShow: function () {
-    wx.getStorage({
-      key: 'userInfo',
-      success: user => {
-        this.setData({
-          userInfo: user.data
-        })
-      }
-    })
+    
   },
   onPullDownRefresh: function () {}
 })

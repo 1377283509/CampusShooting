@@ -11,7 +11,7 @@
 <!-- 状态异常 -->
 <block wx:if="{{ !userInfo }}">
 	<view class="login-card margin-top">
-		<view class="text-xs text-gray">hi~ 登录开启更多好玩的功能</view>
+		<tip>hi~ 登录开启更多好玩的功能</tip>
 		<button open-type="getUserInfo" class="button" bindgetuserinfo="getUserInfo">
 			<view>微信登录</view>
 		</button>
@@ -29,7 +29,8 @@
 			<view class="content text-black">
 				<view class="text-cut">
 					<text>{{ userInfo.nickName }}</text>
-					<text class="{{userInfo.gender=='男'?'cuIcon-male text-blue':'cuIcon-female text-pink'}} margin-left-sm"></text>
+					<text
+						class="{{userInfo.gender=='男'?'cuIcon-male text-blue':'cuIcon-female text-pink'}} margin-left-sm"></text>
 				</view>
 				<view class="text-gray text-sm flex">
 					<text class="cuIcon-location">{{ userInfo.university }}</text>
@@ -58,7 +59,7 @@
 				<view class="cu-item" bindtap="navToLikePage" data-index="{{ index }}">
 					<view class="{{ item.icon }} {{ item.color }}">
 					</view>
-					<text class="text-gray">{{ item.nums==0?'暂无':item.nums }}</text>
+					<text class="text-gray">{{ item.nums==0?'0':item.nums }}</text>
 				</view>
 			</block>
 		</view>
@@ -72,44 +73,41 @@
 		</view>
 		<view class="cu-avatar-group" wx:if="{{ focusList.length!=0 }}">
 			<block wx:for="{{ [0,1,2,3,4,5,6,7,8,9] }}" wx:key="index">
-				<view wx:if="{{ index<focuslist.length }}" class="cu-avatar round lg" style="background-image:url({{focuslist[index].avatarUrl}})"></view>
+				<view wx:if="{{ index<focuslist.length }}" class="cu-avatar round lg"
+					style="background-image:url({{focuslist[index].avatarUrl}})"></view>
 			</block>
 		</view>
 
-		<view wx:if="{{ focusList.length == 0 }}" class="text-gray text-sm" style="width:100%; text-align:center;padding:24rpx 0">还没有关注哦</view>
+		<view wx:if="{{ focusList.length == 0 }}" class="text-gray text-sm"
+			style="width:100%; text-align:center;padding:24rpx 0">还没有关注哦</view>
 	</view>
+
+	<!-- 勋章 -->
+	<block wx:if="{{ medals.length!=0 }}">
+		<medal-wall medals="{{ medals }}" userId="{{ userInfo._id }}"></medal-wall>
+	</block>
+
 
 	<!-- 发布 -->
-	<view class="my-card">
-		<view class="cus-sub-title text-lg">
-			<text class="cuIcon-pick text-blue margin-right-sm"></text>
-			<text class="text-df">发布</text>
-		</view>
-		<view class="grid col-3 text-center">
-			<block wx:for="{{ pubList }}" wx:key="index">
-				<navigator class="nav-li shadow {{ item.color }} {{ item.icon }}" url="{{ item.url }}" open-type="navigate" role="navigation">
-					<text style="margin-left:24rpx">{{ item.name }}</text>
-				</navigator>
-			</block>
+	<view class="cu-list menu" style="margin-top:12rpx" bindtap="navToPublishHistory">
+		<view class="cu-item">
+			<view class="content">
+				<text class="cuIcon-timefill text-blue "></text>
+				我发布的
+			</view>
+			<view class="action">
+				<text class="cuIcon-right text-sm"></text>
+			</view>
 		</view>
 	</view>
 
-	<view class="cu-form-group" style="margin-top: 12rpx">
-    <view class="title">更新头像昵称</view>
-    <text class="cuIcon-refresh text-gray"></text>
+	<view class="cu-form-group" style="margin-top:12rpx">
+		<view class="title">功能反馈</view>
+		<text class="cuIcon-question text-gray"></text>
 	</view>
-	
+
 	<view class="cu-form-group">
-    <view class="title">功能反馈</view>
-    <text class="cuIcon-question text-gray"></text>
+		<view class="title">联系我们</view>
+		<text class="cuIcon-weixin text-gray"></text>
 	</view>
-	
-	<view class="cu-form-group">
-    <view class="title">联系我们</view>
-    <text class="cuIcon-weixin text-gray"></text>
-  </view>
-
-
-
-
 </block>

@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "用户详情"
+  "usingComponents": {
+    "medal-wall": "../../components/medal-wall/medal-wall"
+  },
+  "navigationStyle": "custom"
 }

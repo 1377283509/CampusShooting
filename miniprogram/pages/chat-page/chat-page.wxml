@@ -1,6 +1,6 @@
 <wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
-<scroll-view scroll-y="true" class="scroll-view" scroll-into-view="{{ last }}" style="padding-bottom: {{ 50+keyboardHeight }}px">
-	<view id="item{{ index }}" class="cu-chat" wx:for="{{ msgList }}" wx:key="index">
+<scroll-view scroll-y="true" refresher-enabled="true" bindrefresherrefresh="refresh" class="scroll-view" scroll-into-view="{{ lastItem }}" style="padding-bottom:50px">
+	<view id="item{{ index+1 }}" class="cu-chat" wx:for="{{ msgList }}" wx:key="index">
 		<!-- 我发送 -->
 		<view class="cu-item self" wx:if="{{ item.from==myInfo.id }}">
 			<view class="main">

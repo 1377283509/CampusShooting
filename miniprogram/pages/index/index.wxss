@@ -35,3 +35,12 @@
   padding-left: 8rpx;
   padding-right: 16rpx;
 }
+
+.nav-li {
+  display: inline-block;
+  padding: 24rpx 24rpx;
+  border-radius: 12rpx;
+  width: 31%;
+  margin: 8rpx 1% 8rpx 1.1%;
+  position: relative;
+}

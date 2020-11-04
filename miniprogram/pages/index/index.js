@@ -25,21 +25,60 @@ Page({
     // 技巧列表
     skillList: [],
 
+    showPublish: false,
+
     // 轮播图列表
     swiperList:[
-      {
-        coverImage:"https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00132-3823.jpg",
-        url:"",
-      },
-      {
-        coverImage:"https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00483-3283.jpg",
-        url:"",
-      },
-      {
-        coverImage:"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=276711261,3145669979&fm=26&gp=0.jpg",
-        url:"",
-      },
-    ]
+    ],
+    pubList: [{
+      name: "动态",
+      url: "../publish-image/publish-image",
+      color: "bg-green",
+      icon: "cuIcon-camera"
+    },
+    {
+      name: "视频",
+      url: "../publish-video/publish-video",
+      color: "bg-purple",
+      icon: "cuIcon-video"
+    },
+    {
+      name: "约拍",
+      url: "../publish-appointment/publish-appointment",
+      color: "bg-blue",
+      icon: "cuIcon-group"
+    },
+    {
+      name: "壁纸",
+      url: "../publish-wallpaper/publish-wallpaper",
+      color: "bg-red",
+      icon: "cuIcon-pic"
+    },
+    {
+      name: "话题",
+      url: "../publish-topic/publish-topic",
+      icon: "cuIcon-magic",
+      color: "bg-orange"
+    },
+  ]
+  },
+
+  showModal(){
+    this.setData({
+      showPublish: true
+    })
+  },
+
+  hideModal(){
+    this.setData({
+      showPublish: false
+    })
+  },
+
+  onTapSearch(){
+    wx.navigateTo({
+      url: '../search-result/search-result',
+    })
   },
 
   // 点击学校回调
@@ -198,7 +237,7 @@ Page({
       that.getHotSchool()
     }, 2000)
   },
-  onHide(){
+  onUnload(){
     clearTimeout(timeOut)
   }
 })

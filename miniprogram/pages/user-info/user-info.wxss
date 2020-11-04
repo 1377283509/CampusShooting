@@ -74,5 +74,5 @@
 }
 
 .cus-sub-title{
-  padding: 12rpx 24rpx;
+  padding: 12rpx 36rpx;
 }

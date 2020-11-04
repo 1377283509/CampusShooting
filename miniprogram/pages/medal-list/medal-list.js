@@ -1,4 +1,4 @@
-// miniprogram/pages/archive/archive.js
+// miniprogram/pages/medal-list/medal-list.js
 Page({
 
   /**

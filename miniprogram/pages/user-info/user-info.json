@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "medal-wall": "../../components/medal-wall/medal-wall"
+  },
   "navigationStyle": "custom"
 }

@@ -1,5 +1,5 @@
 const cloud = require("../../utils/cloud.js")
-var school = null
+var university = null
 Page({
 
   data: {
@@ -74,7 +74,7 @@ Page({
   },
 
   selectSchool(){
-    school = this.data.university
+    university = this.data.university
     wx.navigateTo({
       url: '../university-list/university',
     })
@@ -114,7 +114,7 @@ Page({
     })
   },
 
-  // 加载视数据
+  // 加载视频数据
   async getVideoList(){
     var videoList = this.data.videoList
     var university = this.data.university
@@ -153,7 +153,7 @@ Page({
     var university = this.data.university
     var appointmentList = this.data.appointmentList
     var res = await cloud.callFunction("appointment", {
-      $url: 'getAppointment',
+      $url: 'getAppointments',
       university: university,
       offset: appointmentList.length
     })
@@ -213,7 +213,7 @@ Page({
 
   onLoad: async function (options) {
     var app = getApp()
-    var university = app.globalData.university
+    university = app.globalData.university
     if (! university) {
       university = await this.getStorage()
     } 
@@ -224,15 +224,15 @@ Page({
   },
 
   onShow(){
-    if(this.data.university != school){
+    if(this.data.university != university){
       this.setData({
         imageList: [],
         videoList: [],
         appointmentList: [],
         wallpaperList: []
       })
+      this.getData()
     }
-    this.getData()
   },
 
   onHide: function () {

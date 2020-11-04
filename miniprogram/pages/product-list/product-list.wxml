@@ -1,0 +1,55 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">作品</text>
+		<text class="bg-green"></text>
+	</view>
+</view>
+
+<scroll-view class="bg-white nav">
+	<view>
+		<block wx:for="{{ tabList }}" wx:key="index">
+			<view class="cu-item flex-sub {{curTab==index?'active-tab':''}}" data-id="{{index}}" bindtap="selectTab">
+				<text class="{{ item.icon }}"></text>
+				{{item.name}}
+			</view>
+		</block>
+	</view>
+</scroll-view>
+
+
+<!-- 图片 -->
+<block wx:if="{{curTab == 0}}" wx:for="{{ imageList }}" wx:key="index">
+	<image-card image="{{item}}"></image-card>
+</block>
+
+<!-- 视频 -->
+<view class="list">
+	<block wx:if="{{curTab == 1}}" wx:for="{{ videoList }}" wx:key="index">
+		<video-card video="{{item}}"></video-card>
+	</block>
+</view>
+
+<!-- 壁纸 -->
+<view class="flex flex-wrap justify-between padding-sm bg-white" wx:if="{{ curTab == 2 }}">
+	<block wx:for="{{ wallpaperList }}" wx:key="index">
+		<block wx:for="{{ item.images }}" wx:for-key="idx" wx:for-item="url" wx:key="idx">
+			<image class="img margin-bottom-sm bg-red" src="{{url}}" mode="aspectFill"
+				style="width: 49%; height:650rpx; border-radius:12rpx" bindtap="navToWallpaperDetail" data-id="{{ item._id }}">
+			</image>
+		</block>
+	</block>
+</view>
+
+<!-- 约拍 -->
+<block wx:if="{{ curTab == 3 }}">
+	<block wx:for="{{ appointmentList }}" wx:key="index">
+		<appointment-card appointment="{{ item }}" hideUser="false"></appointment-card>
+	</block>
+</block>
+
+
+<view class="cu-load bg-white {{isLoading?'loading':''}}"></view>
+<tip wx:if="{{!isLoading}}" content="到底了哦"></tip>
+<nav-back></nav-back>

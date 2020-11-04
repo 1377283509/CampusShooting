@@ -1,2 +1,57 @@
-<!--miniprogram/pages/userDetail/userDetail.wxml-->
-<text>miniprogram/pages/userDetail/userDetail.wxml</text>
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<blank-view color="white"></blank-view>
+<view class="cu-bar bg-white">
+	<view class="action sub-title">
+		<text class="text-xxl text-bold">用户</text>
+		<text class="bg-purple"></text>
+	</view>
+</view>
+<!-- 基本信息 -->
+<view class="cu-list menu-avatar">
+  <view class="cu-item">
+    <view class="cu-avatar round lg" style="background-image:url({{ userInfo.avatarUrl }})"></view>
+    <view class="content">
+      <view class="text-cut text-lg">
+        {{userInfo.nickName}}
+        <image src="../../static/icons/{{ userInfo.gender=='男'?'male.png':'female.png' }}"
+          style="width:28rpx;height:28rpx;margin-left:12rpx">
+        </image>
+      </view>
+      <view class="text-cut text-gray text-sm">
+        <text class="cuIcon-locationfill text-gray"></text>
+        {{ userInfo.university }}
+      </view>
+    </view>
+    <view bindtap="navToChat" class="action cu-btn round sm" style="margin-right: 16rpx">私信
+    </view>
+  </view>
+</view>
+
+<!-- 个人介绍 -->
+<view class="card-text">
+  <text class="cuIcon-write text-black margin-right-sm"></text>
+  {{ userInfo.introduction==null?'暂无介绍':userInfo.introduction }}</view>
+
+<!-- 勋章展示 -->
+<block wx:if="{{ medals.length!=0 }}">
+  <medal-wall medals="{{ medals }}" userId="{{ userInfo._id }}"></medal-wall>
+</block>
+
+
+<!-- 发布历史 -->
+<view class="cu-bar bg-white solid-bottom" style="margin-top:16rpx" bindtap="navToProductList">
+  <view class="action text-cut">
+    <text class="cuIcon-title text-green"></text>
+    {{userInfo.nickName}}的作品
+  </view>
+  <view class="action text-df  text-gray">
+    详情
+    <text class="cuIcon-right text-gray" style="font-size:28rpx"></text>
+  </view>
+</view>
+
+<view class="flex flex-direction" style="margin-top:16rpx">
+  <button class="cu-btn {{hasFocus?'bg-white text-red':'bg-red text-white'}} lg button-hover" bindtap="onTapButton" role="button">{{ hasFocus?'取消关注':'关注' }}</button>
+</view>
+
+<nav-back></nav-back>

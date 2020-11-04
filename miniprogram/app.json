@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/user-info/user-info",
-    "pages/archive/archive",
     "pages/university/university",
     "pages/edit-userinfo/edit-userinfo",
     "pages/university-list/university",
@@ -31,7 +30,10 @@
     "pages/wallpaper-detail/wallpaper-detail",
     "pages/theme-products/theme-products",
     "pages/search-result/search-result",
-    "pages/image-list/image-list"
+    "pages/image-list/image-list",
+    "pages/medal-list/medal-list",
+    "pages/appointment-detail/appointment-detail",
+    "pages/product-list/product-list"
   ],
   "window": {
     "navigationStyle": "default",
@@ -39,7 +41,7 @@
     "navigationBarBackgroundColor": "#ffffff"
   },
   "tabBar": {
-    "backgroundColor": "#F0F0F0",
+    "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "list": [
       {
@@ -70,7 +72,6 @@
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "search-bar": "/components/search-bar/search-bar",
     "cus-swiper": "/components/cus-swiper/cus-swiper",
     "tip": "/components/tip/tip",
     "blank-view": "/components/blank-view/blank-view",

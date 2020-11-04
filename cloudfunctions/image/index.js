@@ -10,7 +10,8 @@ const imageCollectionName = "images"
 const userCollectionName = "user"
 const focusCollectionName = "focus-realtion"
 const imageLikeCollectionName = "image-like-realtion"
-const topicCollectionName = "topics"
+const imageCommentCollectionName = "image-comments"
+const childCommentCollectionName = "child-comments"
 
 const db = cloud.database()
 const _ = db.command
@@ -439,12 +440,12 @@ exports.main = async (event, context) => {
   })
 
   // 获取喜欢的动态
-  app.router("getLikeImages", async (ctx, next) => {
+  app.router("getLikeImages",
     // 获取喜欢的列表
     async (ctx, next) => {
         try {
           var offset = event.offset ? event.offset : 0
-          const res = await db.collection(imageLikeCollectionName).where({
+          var res = await db.collection(imageLikeCollectionName).where({
               _openid: event.userInfo.openId
             })
             .skip(offset)
@@ -453,6 +454,7 @@ exports.main = async (event, context) => {
               imageId: true
             }).get()
           var list = []
+          console.log(res.data)
           res.data.map((i) => {
             list.push(i.imageId)
           })
@@ -472,7 +474,6 @@ exports.main = async (event, context) => {
           const res = await db.collection(imageCollectionName).where({
             _id: _.in(ctx.data.likeList),
           }).get()
-          console.log(res.data)
           ctx.body = {
             data: res.data,
             code: 1
@@ -484,8 +485,279 @@ exports.main = async (event, context) => {
             code: 0
           }
         }
-      }
   })
+
+  // 添加子评论
+  app.router("addChildComment",
+    // 检测用户状态
+    async (ctx, next) => {
+        try {
+          let user = await db.collection(userCollectionName).where({
+            _openid: event.userInfo.openId
+          }).field({
+            _id: true,
+            avatarUrl: true,
+            nickName: true,
+            status: true
+          }).get()
+          // 如果用户不存在
+          if (!user.data) {
+            ctx.body = {
+              data: "未登录",
+              code: 0
+            }
+          } else {
+            // 如果用户账号异常
+            if (!user.data[0].status) {
+              ctx.body = {
+                data: '账号异常',
+                code: 0
+              }
+            } else {
+              ctx.data.userInfo = user.data[0]
+              await next()
+            }
+          }
+        } catch (error) {
+          console.log(error)
+          ctx.body = {
+            data: "数据库异常",
+            code: 0
+          }
+        }
+      },
+      async (ctx, next) => {
+        try {
+          var data = {
+            from: {
+              userId: ctx.data.userInfo._id,
+              userName: ctx.data.userInfo.nickName
+            },
+            to: {
+              userId: event.commentTo.userId,
+              userName: event.commentTo.userName,
+            },
+            parentId: event.commentTo.parentId,
+            value: event.comment,
+            date: Date.now(),
+            videoId: event.videoId,
+            likeCount: 0
+          }
+          var addRes = await db.collection(childCommentCollectionName).add({
+            data: data
+          })
+          if (addRes.errMsg == "collection.add:ok") {
+            ctx.body = {
+              data: "发布成功",
+              code: 1
+            }
+          } else {
+            ctx.body = {
+              data: "发布失败",
+              code: 0
+            }
+          }
+        } catch (error) {
+          ctx.body = {
+            data: "数据库异常",
+            code: 0
+          }
+        }
+      })
+
+  // 添加评论
+  app.router("addComment",
+    // 检测用户状态
+    async (ctx, next) => {
+        try {
+          let user = await db.collection(userCollectionName).where({
+            _openid: event.userInfo.openId
+          }).field({
+            _id: true,
+            avatarUrl: true,
+            nickName: true,
+            status: true
+          }).get()
+          // 如果用户不存在
+          if (!user.data) {
+            ctx.body = {
+              data: "未登录",
+              code: 0
+            }
+          } else {
+            // 如果用户账号异常
+            if (!user.data[0].status) {
+              ctx.body = {
+                data: '账号异常',
+                code: 0
+              }
+            } else {
+              ctx.data.userInfo = user.data[0]
+              await next()
+            }
+          }
+        } catch (error) {
+          console.log(error)
+          ctx.body = {
+            data: "数据库异常",
+            code: 0
+          }
+        }
+      },
+      // 添加评论
+      async (ctx, next) => {
+        try {
+          const transaction = await db.startTransaction()
+          var data = {
+            imageId: event.imageId,
+            value: event.comment,
+            from: {
+              userId: ctx.data.userInfo._id,
+              userAvatar: ctx.data.userInfo.avatarUrl,
+              userName: ctx.data.userInfo.nickName,
+            },
+            date: Date.now(),
+            likeCount: 0
+          }
+          var incRes = await transaction.collection(imageCollectionName).where({
+            _id: event.imageId
+          }).update({
+            data: {
+              commentCount: _.inc(1)
+            }
+          })
+          var addRes = await transaction.collection(imageCommentCollectionName).add({
+            data: data
+          })
+          let addStatus = addRes.errMsg == "collection.add:ok"
+          let incStatus = incRes.errMsg == "collection.update:ok"
+          if (addStatus && incStatus) {
+            await transaction.commit()
+            ctx.body = {
+              data: '发布成功',
+              code: 1
+            }
+          } else {
+            await transaction.rollback()
+            ctx.body = {
+              data: '发布失败',
+              code: 0
+            }
+          }
+        } catch (error) {
+          console.log(error)
+          ctx.body = {
+            data: "数据库异常",
+            code: 0
+          }
+        }
+      }
+  )
+
+  // 获取评论
+  app.router("getComments", async (ctx, next) => {
+    try {
+      let res = await db.collection(imageCommentCollectionName).aggregate().match({
+        imageId: event.imageId
+      }).lookup({
+        from: childCommentCollectionName,
+        localField: "_id",
+        foreignField: 'parentId',
+        as: 'comments'
+      }).end()
+      if (res.errMsg == "collection.aggregate:ok") {
+        ctx.body = {
+          data: res.list,
+          code: 1
+        }
+      } else {
+        ctx.body = {
+          data: "加载失败",
+          code: 0
+        }
+      }
+    } catch (error) {
+      console.log(error)
+      ctx.body = {
+        data: "数据库异常",
+        code: 0
+      }
+    }
+  })
+
+  // 删除评论
+  app.router("deleteComment",
+    async (ctx, next) => {
+      try {
+        const transaction = await db.startTransaction()
+        // 删除原评论
+        const delRes = await transaction.collection(imageCommentCollectionName).where({
+          _id: event.id
+        }).remove()
+        // 评论数 -1
+        const decRes = await transaction.collection(imageCollectionName).where({
+          _id: event.imageId
+        }).update({
+          data: {
+            commentCount: _.inc(-1)
+          }
+        })
+        // 删除子评论
+        const delChildrenRes = await transaction.collection(childCommentCollectionName).where({
+          parentId: event.id
+        }).remove()
+
+        let delStatus = delRes.errMsg == "collection.remove:ok"
+        let decStatus = decRes.errMsg == "collection.update:ok"
+        let delChildrenStatus = delChildrenRes.errMsg == "collection.remove:ok"
+        if (delStatus && decStatus && delChildrenStatus) {
+          ctx.body = {
+            data: "删除成功",
+            code: 1
+          }
+          await transaction.commit()
+        } else {
+          ctx.body = {
+            data: "删除失败",
+            code: 0
+          }
+          await transaction.rollback()
+        }
+      } catch (error) {
+        console.log(error)
+        ctx.body = {
+          data: "数据库异常",
+          code: 0
+        }
+      }
+    })
+
+  // 删除子评论
+  app.router("deleteChildComment",
+    async (ctx, next) => {
+      try {
+        let res = await db.collection(childCommentCollectionName).where({
+          _id: event.id
+        }).remove()
+        if (res.errMsg == "collection.remove:ok") {
+          ctx.body = {
+            data: "删除成功",
+            code: 1
+          }
+        } else {
+          ctx.body = {
+            data: "删除失败",
+            code: 0
+          }
+        }
+      } catch (error) {
+        ctx.body = {
+          data: "数据库异常",
+          code: 0
+        }
+      }
+    })
+
 
   return app.serve();
 }

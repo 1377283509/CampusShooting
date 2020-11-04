@@ -1,1 +1,10 @@
-/* miniprogram/pages/userDetail/userDetail.wxss */
+.card-text{
+  padding: 18rpx 24rpx;
+  background-color: white;
+}
+
+.my-card{
+  margin-top: 12rpx;
+  background-color: white;
+  padding-bottom: 12rpx;
+}

@@ -21,7 +21,7 @@ Component({
    */
   methods: {
     navToDetails(){
-      wx.redirectTo({
+      wx.navigateTo({
         url: '../../pages/video-details/video-details?id='+ this.properties.video._id,
       })
     }

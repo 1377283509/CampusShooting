@@ -1,0 +1,33 @@
+{
+  "envId": "school-shoot-msw1y",
+  "version": "2.0",
+  "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+  "functionRoot": "./functions",
+  "functions": [],
+  "framework": {
+    "name": "campus-shooting",
+    "plugins": {
+      "function": {
+        "use": "@cloudbase/framework-plugin-function",
+        "inputs": {
+          "functionRootPath": "./functions"
+        }
+      },
+      "mp": {
+        "use": "@cloudbase/framework-plugin-mp",
+        "inputs": {
+          "appid": "小程序appid",
+          "privateKeyPath": "小程序代码上传密钥文件地址（微信可到公众平台进行下载）",
+          "localPath": "./",
+          "ignores": [
+            "node_modules/**/*"
+          ],
+          "deployMode": "preview",
+          "previewOptions": {
+            "desc": "CloudBase Framework 一键预览"
+          }
+        }
+      }
+    }
+  }
+}

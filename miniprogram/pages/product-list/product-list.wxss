@@ -1,0 +1,4 @@
+.list {
+  background-color: white;
+  padding: 12rpx 24rpx;
+}

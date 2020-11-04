@@ -14,7 +14,7 @@ Page({
     offset: 0,
     keyboardHeight: 0,
     content: "",
-    last: null,
+    lastItem: null,
     lastTime: null,
     msgList: [],
     showMenuCard: false,
@@ -32,19 +32,41 @@ Page({
     ]
   },
 
+  // 下拉刷新
+  async refresh(){
+    console.log("刷新")
+  },
+
   // 监听数据库
   listener() {
-    console.log(that.data.myInfo.id)
+    var msgList = this.data.msgList
+    var last = msgList[msgList.length-1]
+    var lastTime  = last?last.time:0
+    var list = [that.data.myInfo.id, that.data.userInfo.id]
     watcher = collection
       .where({
-        to: that.data.myInfo.id,
+        to: _.in(list),
+        from: _.in(list),
+        time: _.gt(lastTime)
       })
       .watch({
         onChange: function (snapshot) {
-          console.log(snapshot)
+          var list = []
+          snapshot.docChanges.map(i=>{
+            list.push(i.doc)
+          })
+          msgList = msgList.concat(list)
+          var lastItem = `item${msgList.length}`
+          that.setData({
+            msgList: msgList,
+            lastItem: lastItem
+          })
         },
         onError: function (err) {
-          console.error('the watch closed because of error', err)
+          wx.showToast({
+            title: '开启监听失败',
+            icon: 'none'
+          })
         }
       })
   },
@@ -159,36 +181,6 @@ Page({
 
   },
 
-  // 获取历史消息
-  getHistory() {
-    wx.cloud.callFunction({
-      name: 'message',
-      data: {
-        $url: "getMessages",
-        userId: that.data.userInfo.id,
-        myId: that.data.myInfo.id,
-        offset: that.data.offset,
-        time: that.data.lastTime
-      },
-      success: res => {
-        if (res.result.code == 1) {
-          var list = that.data.msgList
-          that.setData({
-            msgList: list.concat(res.result.data),
-            last: `item${res.result.data.length-1}`,
-            offset: res.result.data.length,
-          })
-          that.listener()
-        } else {
-          wx.showToast({
-            title: '数据加载失败',
-            icon: 'none'
-          })
-        }
-      }
-    })
-  },
-
   // 发送消息
   sendMessage(e) {
     var content = that.data.content
@@ -257,7 +249,7 @@ Page({
                 avatarUrl: options.avatarUrl
               },
             })
-            that.getHistory()
+            that.listener()
           },
         })
       }

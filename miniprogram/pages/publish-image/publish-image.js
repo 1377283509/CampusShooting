@@ -1,4 +1,5 @@
 const utlis = require("../../utils/utils.js")
+const cloud =  require("../../utils/cloud.js")
 Page({
   data: {
     // 图片列表
@@ -150,7 +151,6 @@ Page({
         university: that.data.university,
       },
       success: res => {
-        console.log(res)
         if(res.result.code == 1){
           wx.navigateBack({
             complete: (res) => {

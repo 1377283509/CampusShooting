@@ -7,12 +7,6 @@
 	</view>
 </view>
 
-<view class="cu-bar search bg-white">
-	<view class="search-form round">
-		<text class="cuIcon-search"></text>
-		<input placeholder="搜索" type="text" confirm-type="search" bindconfirm="onSearch"></input>
-	</view>
-</view>
 
 <scroll-view class="bg-white nav">
 	<view>
@@ -27,8 +21,9 @@
 
 
 <!-- 历史消息 -->
-<view wx:if="{{ curTab == 1 }}" class="cu-list menu-avatar" wx:for="{{historyList}}" wx:key="index">
-	<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" data-target="move-box-{{index}}" >
+<view wx:if="{{ curTab == 1 }}" class="cu-list menu-avatar" >
+	<block wx:for="{{historyList}}" wx:key="index">
+		<view class="cu-item">
 		<view class="cu-avatar round lg" style="background-image:url({{ item.user[0].avatarUrl }})"></view>
 		<view class="content" data-id="{{ item._id }}" data-user="{{ item.user[0] }}" bindtap="navToChatPage">
 			<view class="text-cut">
@@ -42,11 +37,14 @@
 			<view wx:if="{{ item.msgNums!=0 }}" class="cu-tag round bg-gray sm">{{ item.msgNums }}</view>
 		</view>
 	</view>
+	</block>
+
 </view>
 
 <!-- 当前消息 -->
-<view wx:if="{{ curTab == 0 }}" class="cu-list menu-avatar" wx:for="{{chatList}}" wx:key="index">
-	<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" >
+<view wx:if="{{ curTab == 0 }}" class="cu-list menu-avatar" >
+	<block wx:for="{{chatList}}" wx:key="index">
+		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" >
 		<view class="cu-avatar round lg" style="background-image:url({{ item.user[0].avatarUrl }})"></view>
 		<view class="content" data-id="{{ item._id }}" data-user="{{ item.user[0] }}" bindtap="navToChatPage">
 			<view class="text-cut">
@@ -64,4 +62,6 @@
 			<view class="bg-red" bindtap="delete" data-id="{{item._id}}">删除</view>
 		</view>
 	</view>
+	</block>
+
 </view>

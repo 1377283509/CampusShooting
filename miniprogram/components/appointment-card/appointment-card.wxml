@@ -1,5 +1,5 @@
 <wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
-<view class="card">
+<view class="card" bindtap="navToDetail" data-id="{{appointment._id}}">
 	<view class="top" wx:if="{{ !hideUser }}">
 		<view class="user-avatar">
 			<image src="{{appointment.user[0].avatarUrl}}" mode="aspectFill"></image>

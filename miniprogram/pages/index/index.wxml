@@ -8,14 +8,28 @@
 	</view>
 </view>
 <!-- 搜索 -->
-<search-bar></search-bar>
+<view class="box">
+	<view class="cu-bar search bg-white">
+		<view class="search-form round" bindtap="onTapSearch">
+			<text class="cuIcon-search"></text>
+			<input type="text" disabled="true" placeholder="搜索" />
+		</view>
+		<view class="action" bindtap="showModal">
+			<text class="cuIcon-add text-black text-white"
+				style="font-size: 48rpx;padding: 4rpx 24rpx;border-radius:50px;background-color:#38C098"></text>
+		</view>
+	</view>
+
+</view>
+
 <!-- 轮播 -->
 <view style="width:100%; background-color:white; padding: 10rpx 0">
 	<cus-swiper swiperList="{{ swiperList }}"></cus-swiper>
 </view>
 
-<sub-title-bar title="校园动态" moreUrl="/pages/image-list/image-list"></sub-title-bar>
-<view style="padding: 12rpx 0;background-color:white">
+<!-- 动态 -->
+<view class="padding-top-sm bg-white" wx:if="{{ imageList.length!=0 }}">
+	<sub-title-bar title="校园动态" moreUrl="/pages/image-list/image-list"></sub-title-bar>
 	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
 		<block wx:for="{{imageList}}" wx:key="index">
 			<simple-image-card image="{{item}}"></simple-image-card>
@@ -24,7 +38,7 @@
 </view>
 
 <!-- 热门话题 -->
-<view class="bg-white" style="padding: 12rpx 12rpx;">
+<view class="bg-white" style="padding: 12rpx 12rpx;padding-top: 24rpx">
 	<scroll-view scroll-x="true">
 		<view style="display:flex;flex-direction:row">
 			<view class="padding-xs" style="display:inline-block">
@@ -35,15 +49,16 @@
 					<view class="cu-tag round">{{ item.name }}</view>
 				</view>
 			</block>
-				<view class="padding-xs" style="display:inline-block" bindtap="navToTopicList">
+			<view class="padding-xs" style="display:inline-block" bindtap="navToTopicList">
 				<view class="cu-tag round">更多</view>
 			</view>
 		</view>
 	</scroll-view>
 </view>
 
-<sub-title-bar title="热门视频" moreUrl="/pages/video-list/video-list"></sub-title-bar>
-<view style="padding: 12rpx 0;background-color:white">
+<!-- 热门视频 -->
+<view class="bg-white padding-top-sm">
+	<sub-title-bar title="热门视频" moreUrl="/pages/video-list/video-list"></sub-title-bar>
 	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
 		<block wx:for="{{hotVideos}}" wx:key="index">
 			<simple-video-card video="{{item}}" color="{{ index%2==0?'#7986cb':'#4db6ac' }}"></simple-video-card>
@@ -51,40 +66,78 @@
 	</scroll-view>
 </view>
 
+<!-- 最新技巧 -->
+<view class="bg-white padding-top-sm">
+	<sub-title-bar title="最新技巧" moreUrl="/pages/skill-list/skill-list"></sub-title-bar>
+	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx;background-colorwhite">
+		<block wx:for="{{skillList}}" wx:key="index">
+			<skill-card skill="{{item}}"></skill-card>
+		</block>
+	</scroll-view>
+</view>
 
-<sub-title-bar title="最新技巧" moreUrl="/pages/skill-list/skill-list"></sub-title-bar>
-<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
-	<block wx:for="{{skillList}}" wx:key="index">
-		<skill-card skill="{{item}}"></skill-card>
-	</block>
-</scroll-view>
 
+<!-- 宣传视频 -->
+<view class="bg-white padding-top-sm">
+	<sub-title-bar title="校园宣传" moreUrl=""></sub-title-bar>
+	<video-swiper videoList="{{ promotionalVideos }}" detailUrl="/pages/video-details/video-details"
+		moreUrl="/pages/video-list/video-list">
+	</video-swiper>
+</view>
 
-<sub-title-bar title="校园宣传" moreUrl=""></sub-title-bar>
-<video-swiper videoList="{{ promotionalVideos }}" detailUrl="/pages/video-details/video-details" moreUrl="/pages/video-list/video-list">
-</video-swiper>
+<!-- 热门壁纸 -->
+<view class="bg-white padding-top-sm">
+	<sub-title-bar title="热门壁纸" moreUrl="/pages/wallpaper-list/wallpaper-list"></sub-title-bar>
+	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
+		<block wx:for="{{wallpapers}}" wx:key="index">
+			<simple-wallpaper-card wallpaper="{{item}}"></simple-wallpaper-card>
+		</block>
+	</scroll-view>
+</view>
 
-<sub-title-bar title="热门壁纸" moreUrl="/pages/wallpaper-list/wallpaper-list"></sub-title-bar>
-<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx">
-	<block wx:for="{{wallpapers}}" wx:key="index">
-		<simple-wallpaper-card wallpaper="{{item}}"></simple-wallpaper-card>
-	</block>
-</scroll-view>
-
-<sub-title-bar title="热门学校" moreUrl="" hideMore="true"></sub-title-bar>
-<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx;background-color:white">
-	<block wx:for="{{schoolList}}" wx:key="index">
-		<view class="school-base" data-name="{{ item.name }}" bindtap="onSelectSchool">
-			<view class="school-card">
-				<!-- logo -->
-				<view class="school-logo">
-					<image src="{{item.logo}}"></image>
+<!-- 热门学校 -->
+<view class="bg-white padding-top-sm">
+	<sub-title-bar title="热门学校" moreUrl="" hideMore="true"></sub-title-bar>
+	<scroll-view scroll-x="true" style="white-space: nowrap;padding-right:12rpx;pdding-bottom:12rpx;background-color:white">
+		<block wx:for="{{schoolList}}" wx:key="index">
+			<view class="school-base" data-name="{{ item.name }}" bindtap="onSelectSchool">
+				<view class="school-card">
+					<!-- logo -->
+					<view class="school-logo">
+						<image src="{{item.logo}}"></image>
+					</view>
+					<!-- name -->
+					<text class="school-name">{{item.name}}</text>
 				</view>
-				<!-- name -->
-				<text class="school-name">{{item.name}}</text>
+			</view>
+		</block>
+	</scroll-view>
+</view>
+
+
+<!-- 发布 -->
+<view class="cu-modal {{showPublish?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">发布</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-gray"></text>
 			</view>
 		</view>
-	</block>
-</scroll-view>
+		<view style="padding: 12rpx 24rpx">
+			<view class="grid col-3 text-center">
+				<block wx:for="{{ pubList }}" wx:key="index">
+					<navigator class="nav-li shadow {{ item.color }} {{ item.icon }}" url="{{ item.url }}" open-type="navigate"
+						role="navigation">
+						<text style="margin-left:24rpx">{{ item.name }}</text>
+					</navigator>
+				</block>
+			</view>
+		</view>
+	</view>
+</view>
 
-<tip content="到底了"></tip>
+
+<tip content="来一起分享你的学校吧!"></tip>
+<view style="text-align:center;color:#38C098;padding-bottom:12rpx" bindtap="showModal">
+	点我发布</view>

@@ -13,7 +13,6 @@ const focusCollection = db.collection("focus-realtion")
 const imageLikeCollection = db.collection("image-like-realtion")
 const videoLikeCollection = db.collection("video-like-realtion")
 const wallpaperLikeCollection = db.collection("wallpaper-like-realtion")
-const skillLikeCollection = db.collection("skill-like-realtion")
 const appointmentLikeCollection = db.collection("appointment-like-realtion")
 
 // 云函数入口函数
@@ -146,7 +145,26 @@ exports.main = async (event, context) => {
 
   // 编辑信息
   app.router("editInfo", async (ctx, next) => {
-    // TODO:编辑用户信息 
+    try {
+      var res = await userCollection.where({
+        _openid: event.userInfo.openId
+      }).update({
+        university: event.university,
+        introduction: event.introduction
+      })
+      console.log(res)
+      ctx.body = {
+        data: "更新成功",
+        code: 1
+      }
+      
+    } catch (error) {
+      console.log(error)
+      ctx.body = {
+        data: "数据库异常",
+        code: 0
+      }
+    }
   })
 
   // 更新头像和用户名
@@ -432,6 +450,54 @@ exports.main = async (event, context) => {
     }
   }
   )
+
+  // 获取用户信息
+  app.router("getUserInfo", 
+  async(ctx, next)=>{
+    try {
+      const res = await userCollection.where({
+        _id: event.id,
+      }).field({
+        _openid: false
+      }).get()
+
+      ctx.body = {
+        data: res.data,
+        code: 1
+      }
+    } catch (error) {
+      console.log(error)
+      ctx.body = {
+        data: "数据库异常",
+        code: 0
+      }
+    }
+  })
+
+  // 判断是否关注
+  app.router("isFocus", async(ctx, next)=>{
+    try {
+      const res = await focusCollection.where({
+        _openid: event.userInfo.openId,
+        userId: event.id
+      }).count()
+      var isFocus = false
+      if(res.total>0){
+        isFocus = true
+      }
+      ctx.body = {
+        data: isFocus,
+        code: 1
+      }
+    } catch (error) {
+      console.log(error)
+      ctx.body = {
+        data: "数据库异常",
+        code: 0
+      }
+    }
+  })
+
 
   return app.serve()
 }

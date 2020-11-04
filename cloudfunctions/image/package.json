@@ -1,7 +1,7 @@
 {
   "name": "image",
   "version": "1.0.0",
-  "description": "",
+  "description": "动态接口",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

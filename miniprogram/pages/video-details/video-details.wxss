@@ -121,6 +121,19 @@
   padding: 8rpx 24rpx;
 }
 
+
+.title-card{
+  margin-top: 12rpx;
+  padding: 12rpx 18rpx;
+  background-color: white;
+}
+.sub-title{
+  padding: 0 24rpx;
+  background-color: white;
+  border-left: red 12rpx solid;
+}
+
+
 .comment-list{
   margin-top: 1rpx;
 }
@@ -183,14 +196,4 @@
   background-color: rgba(0, 0, 0, 0.05);
   padding: 12rpx 12rpx;
   font-size: 26rpx;
-}
-.title-card{
-  margin-top: 12rpx;
-  padding: 12rpx 18rpx;
-  background-color: white;
-}
-.sub-title{
-  padding: 0 24rpx;
-  background-color: white;
-  border-left: red 12rpx solid;
 }

@@ -1,0 +1,26 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+<view class="cu-bar bg-white solid-bottom" style="margin-top:12rpx">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>
+    勋章墙
+  </view>
+  <view class="action text-df  text-gray" bindtap="navToMedalList">
+    更多
+    <text class="cuIcon-right text-gray" style="font-size:28rpx"></text>
+  </view>
+</view>
+
+
+<view class="cu-list menu">
+  <block wx:for="{{ medals }}" wx:key="index">
+    <view class="cu-item" bindtap="onTapMedal" data-index="{{ index }}">
+      <view class="content">
+        <text class="cuIcon-medalfill text-orange"></text>
+        <text class="">{{ item.medal }}</text>
+      </view>
+      <view class="action">
+        <text class="text-gray text-sm">{{ tutil.formatTime(item.date, "yy-mm-dd", "-") }}</text>
+      </view>
+    </view>
+  </block>
+</view>

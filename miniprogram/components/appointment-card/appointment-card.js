@@ -17,6 +17,12 @@ Component({
   },
 
   methods: {
+    navToDetail(e){
+      var {id} = e.currentTarget.dataset
+      wx.navigateTo({
+        url: '../../pages/appointment-detail/appointment-detail?id='+id,
+      })
+    }
 
   }
 })

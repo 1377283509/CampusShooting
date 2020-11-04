@@ -24,28 +24,12 @@ Page({
       curTab: id
     })
   },
-
-  listener(){
-    var watcher = collection.where({
-      to: that.data.myId
-    }).watch({
-      onChange: (data)=>{
-        console.log(data)
-      },
-      onError: (err)=>{
-        console.log(err)
-      }
-    })
-
-
-  },
-
   // 获取消息列表
   async getChatList() {
     var res = await cloud.callFunction("message", {
       $url: 'getChatList',
       myId: that.data.myId
-    }, true)
+    })
     this.setData({
       chatList: res
     })
@@ -60,6 +44,7 @@ Page({
       $url: 'getHistory',
       myId: that.data.myId
     })
+
     this.setData({
       historyList: res
     })
@@ -172,9 +157,12 @@ Page({
         })
         this.getChatList()
         this.getHisrory()
-        this.listener()
       }
     })
+  },
+
+  onShow(){ 
+    this.getChatList()
   },
 
   // 刷新回调

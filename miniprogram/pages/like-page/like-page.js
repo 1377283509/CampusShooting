@@ -60,13 +60,12 @@ Page({
   },
 
   async getImageList() {
-    var list = that.data.imageList
+    var list = this.data.imageList
     var res = await this.getList("image", {
       $url: "getLikeImages",
       offset: list.length,
     })
     list = list.concat(res)
-    console.log(res)
     this.setData({
       imageList: list,
       isLoading: false

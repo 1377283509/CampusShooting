@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "video-card": "../../components/video-card/video-card"
+    "image-card": "../../components/image-card/image-card",
+    "video-card":"/components/video-card/video-card",
+    "appointment-card": "/components/appointment-card/appointment-card"
   },
   "navigationBarTitleText": "我喜欢的"
 }

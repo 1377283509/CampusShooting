@@ -167,18 +167,50 @@ Page({
     }
   },
 
-  onLoad: function (options) {
-    that = this
-    // 读取缓存数据
-    wx.getStorage({
-      key: 'userInfo',
-      success: res => {
-        that.setData({
-          userId: res.data._id
-        })
-        this.getData()
+  // 删除
+  onDelete(e){
+    var {type, id, index} = e.currentTarget.dataset
+    wx.showModal({
+      cancelColor: 'gray',
+      confirmColor: 'red',
+      confirmText: "删除",
+      cancelText: "取消",
+      title: "确定要删除吗？",
+      success: res=>{
+        if(res.confirm){
+          switch(type){
+            case "image":{
+              break
+            }
+            case "video":{
+              break
+            }
+          }
+        }
       }
     })
+  },
+
+  onLoad: function (options) {
+    that = this
+    let {id} = options
+    console.log(options)
+    // 读取缓存数据
+    if(!id){
+      wx.getStorage({
+        key: 'userInfo',
+        success: res => {
+          that.setData({
+            userId: res.data._id
+          })
+          this.getData()
+        }
+      })
+    }else{
+      this.setData({
+        userId: id
+      })
+    }
   },
 
   onReachBottom(){

@@ -2,7 +2,7 @@
 <blank-view color="white"></blank-view>
 <view class="cu-bar bg-white">
 	<view class="action sub-title">
-		<text class="text-xxl text-bold">历史</text>
+		<text class="text-xxl text-bold">作品</text>
 		<text class="bg-green"></text>
 	</view>
 </view>
@@ -21,7 +21,9 @@
 
 <!-- 图片 -->
 <block wx:if="{{curTab == 0}}" wx:for="{{ imageList }}" wx:key="index">
-	<image-card image="{{item}}"></image-card>
+	<view bindlongpress="onDelete" data-type="image" data-id="{{item._id}}" data-index="{{index}}">
+		<image-card image="{{item}}"></image-card>
+	</view>
 </block>
 
 <!-- 视频 -->

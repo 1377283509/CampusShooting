@@ -117,7 +117,6 @@
 <!-- 按钮 -->
 <view class="btn-bar" wx:if="{{ currentTab == 0 }}">
 	<button class="cu-btn round bg-red" bindtap="likeHandle"><text class="{{ isLike?'cuIcon-likefill text-white':'cuIcon-like' }}"></text></button>
-	<button class="cu-btn round" open-type="share" style="background-color:#38C098"><text class="cuIcon-share text-white"></text></button>
 	<button class="cu-btn round bg-black" bindtap="navBack"><text class="cuIcon-back_android text-white"></text></button>
 </view>
 

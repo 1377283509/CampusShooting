@@ -7,6 +7,7 @@ cloud.init({
 
 const wallpaperCollectionName = "wallpapers"
 const userCollectionName = "user"
+const likeCollectionName = "wallpaper-like-realtion"
 
 const db = cloud.database()
 const _ = db.command
@@ -102,9 +103,9 @@ exports.main = async (event, context) => {
       var offset = 0
       var orderField = ""
       var condition = {}
-      if(event.condition) condition = event.condition
+      if (event.condition) condition = event.condition
       if (event.offset) offset = event.offset
-      if(event.orderField) orderField = event.orderField
+      if (event.orderField) orderField = event.orderField
       const res = await db.collection(wallpaperCollectionName).where(condition).field({
         images: true,
         likeCount: true
@@ -157,12 +158,12 @@ exports.main = async (event, context) => {
         }
       }
     })
-  
-    // 获取我发布的壁纸
-  app.router("getMyWallpapers", async(ctx, next)=>{
+
+  // 获取我发布的壁纸
+  app.router("getMyWallpapers", async (ctx, next) => {
     try {
       var offset = 0
-      if(event.offset) offset = event.offset
+      if (event.offset) offset = event.offset
       const res = await db.collection(wallpaperCollectionName).where({
         userId: event.id
       }).skip(offset).limit(10).get()
@@ -180,6 +181,52 @@ exports.main = async (event, context) => {
 
 
   })
+
+  // 获取喜欢的壁纸
+  app.router("getLikeWallpapers",
+    // 获取喜欢的列表
+    async (ctx, next) => {
+        try {
+          var offset = event.offset ? event.offset : 0
+          var res = await db.collection(likeCollectionName).where({
+              _openid: event.userInfo.openId
+            })
+            .skip(offset)
+            .limit(20)
+            .field({
+              wallpaperId: true
+            }).get()
+          var list = []
+          res.data.map((i) => {
+            list.push(i.wallpaperId)
+          })
+          ctx.data.likeList = list
+          await next()
+        } catch (error) {
+          console.log(error)
+          ctx.body = {
+            data: "数据库异常",
+            code: 0
+          }
+        }
+      },
+      async (ctx, next) => {
+        try {
+          const res = await db.collection(wallpaperCollectionName).where({
+            _id: _.in(ctx.data.likeList),
+          }).get()
+          ctx.body = {
+            data: res.data,
+            code: 1
+          }
+        } catch (error) {
+          console.log(error)
+          ctx.body = {
+            data: "数据库异常",
+            code: 0
+          }
+        }
+      })
 
   return app.serve();
 }

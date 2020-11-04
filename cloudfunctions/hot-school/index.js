@@ -4,7 +4,7 @@ cloud.init({
   env: "school-shoot-msw1y"
 })
 
-const hotSchoolCollectionName = "hot-shcool"
+const hotSchoolCollectionName = "hot-school"
 const db = cloud.database()
 const _ = db.command
 

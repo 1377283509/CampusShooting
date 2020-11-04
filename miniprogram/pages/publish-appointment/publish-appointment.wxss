@@ -1,8 +1,13 @@
 .text-area{
   background-color: white;
+  width: 100%;
   margin-top: 12rpx;
   padding: 24rpx;
   min-height: 300rpx;
+}
+
+.text-area textarea{
+  width: 100%;
 }
 
 .input{

@@ -9,7 +9,7 @@
 <view class="cu-bar search bg-white">
 	<view class="search-form round">
 		<text class="cuIcon-search"></text>
-		<input placeholder="搜话题" value="{{searchValue}}" type="text" confirm-type="search" bindinput="onInput" bindconfirm="onSearch"></input>
+		<input placeholder="搜话题" value="{{searchValue}}" auto-focus="true  " type="text" confirm-type="search" bindinput="onInput" bindconfirm="onSearch"></input>
 	</view>
 </view>
 <!-- tab -->

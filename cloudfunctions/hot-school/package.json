@@ -1,7 +1,7 @@
 {
   "name": "hot-school",
   "version": "1.0.0",
-  "description": "",
+  "description": "热门学校接口",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

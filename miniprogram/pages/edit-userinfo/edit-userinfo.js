@@ -65,15 +65,18 @@ Page({
     wx.showLoading({
       title: '正在保存',
     })
+    var that = this
     return new Promise((resolve, reject)=>{
       wx.cloud.callFunction({
-        name: "editUserInfo",
+        name: "user",
         data: {
-          university: this.data.university,
-          introduction: this.data.introduction
+          $url: "editInfo",
+          university: that.data.university,
+          introduction: that.data.introduction
         },
         success: res=>{
-          if(res.result.errMsg == "collection.update:ok"){
+          console.log(res)
+          if(res.result.code == 1){
             resolve(true)
           }else{
             resolve(false)

@@ -10,12 +10,15 @@
     "minified": true,
     "newFeature": true,
     "coverView": true,
+    "nodeModules": false,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
+    "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
     "useMultiFrameRuntime": false,
     "useApiHook": true,
     "babelSetting": {
@@ -37,26 +40,21 @@
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
         {
           "id": -1,
@@ -216,6 +214,19 @@
           "name": "动态列表",
           "pathName": "pages/image-list/image-list",
           "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "用户详情",
+          "pathName": "pages/userDetail/userDetail",
+          "query": "id=cf3f6e1d5f3a3f58000009381ade14a8",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "大学",
+          "pathName": "pages/university/university",
           "scene": null
         }
       ]

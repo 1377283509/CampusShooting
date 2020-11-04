@@ -1,0 +1,99 @@
+<wxs module="tutil" src="../../utils/format-data.wxs"></wxs>
+	<blank-view color="white"></blank-view>
+	<view class="cu-bar bg-white">
+		<view class="action sub-title">
+			<text class="text-xxl text-bold">约拍</text>
+			<text class="bg-purple"></text>
+		</view>
+	</view>
+
+	<!-- 用户信息 -->
+	<view class="cu-list menu-avatar">
+		<view class="cu-item">
+			<view class="cu-avatar round lg" bindtap="navToUserDetail" style="background-image:url({{ userInfo.avatarUrl }})"></view>
+			<view class="content">
+				<view class="text-lg">{{userInfo.nickName}}</view>
+				<view class="text-gray text-sm">{{tutil.formatTime(appointment.createTime, "yy-mm-dd hh:MM:ss", ".")}}</view>
+			</view>
+			<view class="action" bindtap="onFocus">
+				<view class="cu-btn round sm text-white" style="background-color:{{hasFocus?'lightgray':'#38C098'}}">{{hasFocus?"已关注":"关注"}}</view>
+			</view>
+		</view>
+  </view>
+
+	<!-- 内容 -->
+	<view class="appointment-content">{{ appointment.content }}</view>
+  
+
+	<!-- 评论信息 -->
+	<view class="cu-bar bg-white">
+		<view class="action">
+			<text class="cuIcon-titles text-purple"></text>
+			<text>评论({{appointment.commentCount}})</text>
+		</view>
+	</view>
+	<!-- 评论列表 -->
+	<view class="bg-white">
+	<!-- 没有评论 -->
+		<block wx:if="{{ !comments || comments.length == 0 }}">
+			<tip content="还没有评论哦，赶快抢占沙发吧！"></tip>
+		</block>
+	<!-- 有评论 -->
+		<block wx:else>
+			<view wx:for="{{ comments }}" wx:key="index">
+				<view class="comment-card" wx:if="{{ item.to == null }}">
+					<!-- 卡片头部 -->
+					<view class="comment-card-top" data-id="{{ item.from.userId }}">
+						<view class="cu-avatar round" bindtap="navToUserDetail" style="background-image:url({{ item.from.userAvatar }});">
+						</view>
+						<view class="margin-left com-info">
+							<view class="com-nickname">{{ item.from.userName }}</view>
+							<view class="com-university">
+								<text>{{ tutil.formatTime(item.date, "yy-mm-dd hh:MM:ss")}}</text>
+								<text wx:if="{{ myInfo._id == item.from.userId }}" class="cuIcon-delete margin-left" data-index="{{ index }}" data-id="{{ item._id }}" bindtap="deleteComment"></text>
+							</view>
+						</view>
+					</view>
+
+					<!-- 评论内容 -->
+					<view class="com-body" bindtap="onTapComment" data-id="{{ item._id }}" data-user="{{ item.from }}">
+						<text>{{ item.value }}</text>
+					</view>
+					<!-- 子评论 -->
+					<view class="child-comments" wx:for-item="com" wx:for-index="idx" wx:for="{{ item.comments }}" wx:key="_id">
+						<view bindtap="onTapComment" data-user="{{com.from}}" data-id="{{item._id}}">
+							<text class="text-blue">{{ myInfo.nickName == com.from.userName?'我':com.from.userName }}</text>
+							<text wx:if="{{ myInfo.nickName!=com.to.userName }}">  回复  </text>
+							<text class="text-blue" wx:if="{{ myInfo.nickName!=com.to.userName }}">@{{ com.to.userName }}</text>
+							<text> : {{ com.value }}</text>
+						</view>
+						<view class="com-university" style="width:100%;text-align:left;margin-top:12rpx">
+							<text>{{ tutil.formatTime(com.date, "yy-mm-dd hh:MM:ss")}}</text>
+							<text wx:if="{{ myInfo._id == com.from.userId }}" class="cuIcon-delete margin-left" data-index="{{ index }}" data-idx="{{ idx }}" data-id="{{ com._id }}" bindtap="deleteComment"></text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
+
+
+
+	<!-- 评论输入框 -->
+	<view class="comment-bar" style="bottom:{{ keyboardHeight }}px;">
+		<view class="cu-bar search bg-white">
+			<view class="search-form round">
+				<text class="cuIcon-message lg"></text>
+				<text class="text-blue" wx:if="{{ commentTo!=null }}">@{{ commentTo.userName }}  </text>
+				<input type="text" placeholder="发表评论" confirm-type="send" value="{{ commentValue }}" hold-keyboard="true" bindblur='onBlur' bindinput="onInput">
+				</input>
+			</view>
+			<view class="action">
+				<button wx:if="{{keyboardHeight>0}}" class="cu-btn round margin-right-sm text-white" style="background-color:#38C098" bindtap="onComment" role="button">发送</button>
+				<button wx:if="{{keyboardHeight==0}}" class="cu-btn round bg-red margin-right-sm" bindtap="changeLikeStatus" role="button"><text class="{{isLike?'cuIcon-likefill':'cuIcon-like'}} text-white text-bold" style="font-size:32rpx"></text></button>
+				<button wx:if="{{keyboardHeight==0}}" class="cu-btn bg-black round" bindtap="navBack" role="button">
+					<text class="cuIcon-back_android text-white text-bold" style="font-size:32rpx"></text>
+				</button>
+			</view>
+		</view>
+	</view>

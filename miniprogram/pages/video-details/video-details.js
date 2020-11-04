@@ -76,7 +76,8 @@ Page({
   // 键盘失去焦点回调
   onBlur(){
     that.setData({
-      keyboardHeight: 0 
+      keyboardHeight: 0 ,
+      commentTo: null
     })
   },
 
@@ -376,6 +377,9 @@ Page({
     that = this;
     let id = options.id;
     that.getVideo(id)
+    wx.showShareMenu({
+      withShareTicket: true,
+    })
     wx.getStorage({
       key: 'userInfo',
       success: res => {
